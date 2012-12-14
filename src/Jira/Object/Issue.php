@@ -9,7 +9,7 @@ namespace Jira\Object;
 /**
  *
  */
-class Comment extends ObjectAbstract
+class Issue extends ObjectAbstract
 {
     /**
      * Implements ObjectAbstract::properties().

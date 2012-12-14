@@ -10,7 +10,8 @@ namespace Jira;
 /**
  * Wrapper around the Zend SOAP client connected to a JIRA instance.
  */
-class Client {
+class Client
+{
 
   /**
    * The WSDL endpoint.
@@ -116,8 +117,9 @@ class Client {
    * @return Jira/Request/Issue
    *   The request object for the issue.
    */
-  public function issue($issue_key) {
-    return new Request\Issue($this, $issue_key);
+  public function issue($issue_key)
+  {
+      return new Request\Issue($this, $issue_key);
   }
 
   /**

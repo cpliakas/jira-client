@@ -9,7 +9,8 @@ namespace Jira\Request;
 /**
  *
  */
-class IssueTypes {
+class IssueTypes
+{
 
   /**
    *
