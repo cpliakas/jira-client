@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains Jira\JiraClient.
+ * Contains \Jira\Client.
  */
 
 namespace Jira;
@@ -109,17 +109,28 @@ class Client
   }
 
   /**
-   * Returns an issue request oject.
+   * Returns an issue request object.
    *
    * @param string $issue_key
    *   The key of the issue to return, i.e "AB-123", "CD-456", etc.
    *
-   * @return Jira/Request/Issue
+   * @return Jira\Request\Issue
    *   The request object for the issue.
    */
   public function issue($issue_key)
   {
       return new Request\Issue($this, $issue_key);
+  }
+
+  /**
+   * Returns an issue types request object.
+   *
+   * @return \Jira\Request\IssueTypes
+   *   The request object for the issue types.
+   */
+  public function issueTypes()
+  {
+      return new Request\IssueTypes($this);
   }
 
   /**
@@ -142,7 +153,7 @@ class Client
   {
       $args = func_get_args();
       $args[0] = $this->_token;
-      return $this->__call($method, $args);
+      return call_user_func_array(array($this->_client, $method), $args);
   }
 
   /**
