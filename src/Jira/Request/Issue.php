@@ -47,7 +47,8 @@ class Issue {
   public function call($method) {
       $args = func_get_args();
       $args[0] = $this->_issueKey;
-      return $this->_client->call($method, $args);
+      array_unshift($args, $method);
+      return call_user_func_array(array($this->_client, 'call'), $args);
   }
 
   /**

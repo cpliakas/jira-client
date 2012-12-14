@@ -7,8 +7,6 @@
 
 namespace Jira;
 
-use Jira;
-
 /**
  * Wrapper around the Zend SOAP client connected to a JIRA instance.
  */
@@ -119,7 +117,7 @@ class Client {
    *   The request object for the issue.
    */
   public function issue($issue_key) {
-    return \Jira\Request\Issue($this, $issue_key);
+    return new Request\Issue($this, $issue_key);
   }
 
   /**
