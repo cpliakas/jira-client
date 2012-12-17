@@ -6,34 +6,37 @@
 
 namespace Jira\Request;
 
+use \Jira\Request as Request;
+
 /**
  *
  */
-class IssueTypes
+class IssueTypes extends Request
 {
-
     /**
-     * 
-     * @var \Jira\Client
-     */
-    protected $_client;
-
-    /**
+     * Overrides \Jira\Request:call().
      *
+     * Returns all data as arrays of \Jira\Remote\IssueType objects.
      */
-    public function __construct(\Jira\Client $client)
+    public function call($method)
     {
-        $this->_client = $client;
+        $args = func_get_args();
+        $data = call_user_func_array(array($this->_client, 'call'), $args);
+        return $this->returnArray($data, '\Jira\Remote\IssueType');
     }
+
 
     /**
      * Returns an array of all the issue types for all projects in JIRA.
+     *
+     * @return array
+     *   An array of \Jira\Remote\IssueType objects.
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#getIssue(java.lang.String, java.lang.String)
      */
     public function get()
     {
-        return $this->_client->call('getIssueTypes');
+        return $this->call('getIssueTypes');
     }
 
     /**
@@ -43,11 +46,14 @@ class IssueTypes
      * @param string $project_id
      *   The ID of the project.
      *
+     * @return array
+     *   An array of \Jira\Remote\IssueType objects.
+     *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#getIssueTypesForProject(java.lang.String, java.lang.String)
      */
     public function getForProject($project_id)
     {
-        return $this->_client->call('getIssueTypesForProject', $project_id);
+        return $this->call('getIssueTypesForProject', $project_id);
     }
 
     /**
@@ -57,7 +63,7 @@ class IssueTypes
      */
     public function getSubTaskTypes()
     {
-        return $this->_client->call('getSubTaskIssueTypes');
+        return $this->call('getSubTaskIssueTypes');
     }
 
     /**
@@ -71,6 +77,6 @@ class IssueTypes
      */
     public function getSubTaskTypesForProject($project_id)
     {
-        return $this->_client->call('getSubTaskIssueTypesForProject', $project_id);
+        return $this->call('getSubTaskIssueTypesForProject', $project_id);
     }
 }

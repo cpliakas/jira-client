@@ -6,61 +6,24 @@
 
 namespace Jira\Request;
 
+use \Jira\Request as Request;
+
 /**
  *
  */
-class Issue
+class Issue extends Request
 {
-
-    /**
-     *
-     * @var string
-     */
-    protected $_issueKey;
-
-    /**
-     *
-     * @var \Jira\Client
-     */
-    protected $_client;
-
-    /**
-     *
-     */
-    public function __construct(\Jira\Client $client, $issue_key)
-    {
-        $this->_client = $client;
-        $this->_issueKey = $issue_key;
-    }
-
-    /**
-     * Wrapper around \Jira\Client::call() that adds the issue key as the second
-     * argument of the RPC call.
-     *
-     * @param string $method
-     *   The method being invoked.
-     * @param ...
-     *   All additional arguments after the authentication token and issue key
-     *   passed as the parameters to the RPC call.
-     *
-     * @return mixed
-     *   The data returned by the RPC call.
-     */
-    public function call($method) {
-        $args = func_get_args();
-        $args[0] = $this->_issueKey;
-        array_unshift($args, $method);
-        return call_user_func_array(array($this->_client, 'call'), $args);
-    }
-
     /**
      * Returns information about the issue.
+     *
+     * @return \Jira\Remote\Issue
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#getIssue(java.lang.String, java.lang.String)
      */
     public function get()
     {
-        return $this->call('getIssue');
+        $data = $this->call('getIssue');
+        return new \Jira\Remote\Issue($data);
     }
 
     /**

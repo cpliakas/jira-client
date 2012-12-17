@@ -167,7 +167,7 @@ class Client
     {
         $args = func_get_args();
         $args[0] = $this->_token;
-        return call_user_func_array(array($this->_client, $method), $args);
+        return $this->__call($method, $args);
     }
 
     /**
