@@ -31,16 +31,4 @@ class Entity extends Object
         $this->id = $id;
         return $this;
     }
-
-    /**
-     *
-     * @param string $name
-     *
-     * @return Jira\Remote\NamedEntity
-     *
-     */
-    public function setName($name) {
-        $this->name = $name;
-        return $this;
-    }
 }

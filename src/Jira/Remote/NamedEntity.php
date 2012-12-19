@@ -14,7 +14,8 @@ class NamedEntity extends Entity
      *
      * @return string
      */
-    public function getName($name) {
+    public function getName()
+    {
         return $this->name;
     }
 
@@ -25,7 +26,8 @@ class NamedEntity extends Entity
      * @return Jira\Remote\NamedEntity
      *
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
         return $this;
     }
