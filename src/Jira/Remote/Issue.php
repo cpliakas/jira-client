@@ -143,6 +143,14 @@ class Issue extends Entity
     {
         parent::__construct($data);
 
+        if (!empty($this->affectsVersions)) {
+            $classname = '\Jira\Remote\Version';
+            $this->affectsVersions = $this->buildArray($this->affectsVersions, $classname);
+        }
+        if (!empty($this->components)) {
+            $classname = '\Jira\Remote\Component';
+            $this->components = $this->buildArray($this->components, $classname);
+        }
         if (!empty($this->customFieldValues)) {
             $classname = '\Jira\Remote\CustomFieldValue';
             $this->customFieldValues = $this->buildArray($this->customFieldValues, $classname);
