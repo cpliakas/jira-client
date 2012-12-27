@@ -7,12 +7,17 @@
 
 namespace Jira;
 
+use Jira\Request\Issue;
+use Jira\Request\Issues;
+use Jira\Request\IssueTypes;
+use Jira\Request\Project;
+use Zend\Soap\Client as SoapClient;
+
 /**
  * Wrapper around the Zend SOAP client connected to a JIRA instance.
  */
 class Client
 {
-
     /**
      * The WSDL endpoint.
      */
@@ -23,7 +28,7 @@ class Client
      *
      * @var \Zend\Soap\Client
      */
-    protected $_client;
+    protected $_soapClient;
 
     /**
      * The JIRA authentication token for the user.
@@ -42,8 +47,8 @@ class Client
      */
     public function __construct($host, array $options = array())
     {
-        $wsdl = $host . self::WSDL;
-        $this->_client = new \Zend\Soap\Client($wsdl, $options);
+        $wsdl = rtrim($host, '/') . self::WSDL;
+        $this->_soapClient = new SoapClient($wsdl, $options);
     }
 
     /**
@@ -75,9 +80,9 @@ class Client
      * @return \Zend\Soap\Client
      *   The instantiated SOAP client.
      */
-    function getClient()
+    function getSoapClient()
     {
-        return $this->_client;
+        return $this->_soapClient;
     }
 
     /**
@@ -93,7 +98,7 @@ class Client
      */
     public function login($username, $password)
     {
-        $token = $this->_client->login($username, $password);
+        $token = $this->_soapClient->login($username, $password);
         $this->setToken($token);
         return $token;
     }
@@ -104,7 +109,7 @@ class Client
     public function logout()
     {
         if ($this->_token) {
-            $this->_client->logout($this->_token);
+            $this->_soapClient->logout($this->_token);
         }
     }
 
@@ -119,7 +124,7 @@ class Client
      */
     public function issue($issue_key)
     {
-        return new Request\Issue($this, $issue_key);
+        return new Issue($this, $issue_key);
     }
 
     /**
@@ -130,7 +135,7 @@ class Client
      */
     public function issues()
     {
-        return new Request\Issues($this);
+        return new Issues($this);
     }
 
     /**
@@ -141,7 +146,7 @@ class Client
      */
     public function issueTypes()
     {
-        return new Request\IssueTypes($this);
+        return new IssueTypes($this);
     }
 
     /**
@@ -155,7 +160,7 @@ class Client
      */
     public function project($project_key)
     {
-        return new Request\Project($this, $project_key);
+        return new Project($this, $project_key);
     }
 
     /**
@@ -186,6 +191,6 @@ class Client
      */
     public function __call($method, $args)
     {
-        return call_user_func_array(array($this->_client, $method), $args);
+        return call_user_func_array(array($this->_soapClient, $method), $args);
     }
 }

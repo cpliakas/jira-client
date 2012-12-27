@@ -52,7 +52,7 @@ class Issue extends Entity
      *
      * @var array
      */
-    public $customFieldValue;
+    public $customFieldValues;
 
     /**
      *
@@ -140,28 +140,28 @@ class Issue extends Entity
     public $votes;
 
     /**
-     *
+     * Overrides \Jira\Remote\Object::objectMappings().
      */
-    public function __construct($data = array())
+    public function objectMappings()
     {
-        parent::__construct($data);
-
-        if (!empty($this->affectsVersions)) {
-            $classname = '\Jira\Remote\Version';
-            $this->affectsVersions = $this->buildArray($this->affectsVersions, $classname);
-        }
-        if (!empty($this->components)) {
-            $classname = '\Jira\Remote\Component';
-            $this->components = $this->buildArray($this->components, $classname);
-        }
-        if (!empty($this->customFieldValues)) {
-            $classname = '\Jira\Remote\CustomFieldValue';
-            $this->customFieldValues = $this->buildArray($this->customFieldValues, $classname);
-        }
-        if (!empty($this->fixVersions)) {
-            $classname = '\Jira\Remote\Version';
-            $this->fixVersions = $this->buildArray($this->fixVersions, $classname);
-        }
+        return array(
+            'affectsVersions' => array(
+                'classname' => '\Jira\Remote\Version',
+                'array' => true,
+            ),
+            'components' => array(
+                'classname' => '\Jira\Remote\Component',
+                'array' => true,
+            ),
+            'customFieldValues' => array(
+                'classname' => '\Jira\Remote\CustomFieldValue',
+                'array' => true,
+            ),
+            'fixVersions' => array(
+                'classname' => '\Jira\Remote\Version',
+                'array' => true,
+            ),
+        );
     }
 
     /**
@@ -216,7 +216,7 @@ class Issue extends Entity
      */
     public function getCustomFieldValues()
     {
-        return $this->customFieldValue;
+        return $this->customFieldValues;
     }
 
     /**
@@ -406,7 +406,7 @@ class Issue extends Entity
      */
     public function setCustomFieldValues(array $values)
     {
-        $this->customFieldValue = $values;
+        $this->customFieldValues = $values;
     }
 
     /**

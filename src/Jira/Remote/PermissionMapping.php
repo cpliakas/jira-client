@@ -27,6 +27,23 @@ class PermissionMapping extends Object
     public $entities = array();
 
     /**
+     * Overrides \Jira\Remote\Object::objectMappings().
+     */
+    public function objectMappings()
+    {
+        return array(
+            'permission' => array(
+                'classname' => '\Jira\Remote\Permission',
+                'array' => false,
+            ),
+            'entities' => array(
+                'classname' => '\Jira\Remote\Entity',
+                'array' => true,
+            ),
+        );
+    }
+
+    /**
      *
      * @return \Jira\Remote\Permission
      */
@@ -53,7 +70,7 @@ class PermissionMapping extends Object
      * @return \Jira\Remote\PermissionMapping
      *
      */
-    public function setPermission($permission)
+    public function setPermission(Permission $permission)
     {
         $this->permission = $permission;
         return $this;

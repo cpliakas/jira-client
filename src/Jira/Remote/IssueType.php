@@ -8,7 +8,7 @@ namespace Jira\Remote;
 
 /**
  *
- * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemoteConstant.html
+ * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemoteIssueType.html
  */
 class IssueType extends Constant
 {

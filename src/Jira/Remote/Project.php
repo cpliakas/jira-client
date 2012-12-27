@@ -61,6 +61,27 @@ class Project extends NamedEntity
     public $url;
 
     /**
+     * Overrides \Jira\Remote\Object::objectMappings().
+     */
+    public function objectMappings()
+    {
+        return array(
+            'issueSecurityScheme' => array(
+                'classname' => '\Jira\Remote\Scheme',
+                'array' => false,
+            ),
+            'notificationScheme' => array(
+                'classname' => '\Jira\Remote\Scheme',
+                'array' => false,
+            ),
+            'permissionScheme' => array(
+                'classname' => '\Jira\Remote\PermissionScheme',
+                'array' => false,
+            ),
+        );
+    }
+
+    /**
      *
      * @return string
      */
@@ -151,7 +172,7 @@ class Project extends NamedEntity
      * @return Jira\Remote\Project
      *
      */
-    public function setIssueSecurityScheme(\Jira\Remote\Scheme $scheme)
+    public function setIssueSecurityScheme(Scheme $scheme)
     {
         $this->permissionScheme = $scheme;
         return $this;
@@ -190,7 +211,7 @@ class Project extends NamedEntity
      * @return Jira\Remote\Project
      *
      */
-    public function setNotificationScheme(\Jira\Remote\Scheme $scheme)
+    public function setNotificationScheme(Scheme $scheme)
     {
         $this->notificationScheme = $scheme;
         return $this;
@@ -203,7 +224,7 @@ class Project extends NamedEntity
      * @return Jira\Remote\Project
      *
      */
-    public function setPermissionScheme(\Jira\Remote\PermissionScheme $permission_scheme)
+    public function setPermissionScheme(PermissionScheme $permission_scheme)
     {
         $this->permissionScheme = $permission_scheme;
         return $this;

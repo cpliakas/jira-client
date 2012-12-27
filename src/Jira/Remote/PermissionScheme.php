@@ -20,6 +20,19 @@ class PermissionScheme extends Scheme
      public $permissionMappings = array();
 
     /**
+     * Overrides \Jira\Remote\Object::objectMappings().
+     */
+    public function objectMappings()
+    {
+        return array(
+            'permissionMappings' => array(
+                'classname' => '\Jira\Remote\PermissionMapping',
+                'array' => true,
+            ),
+        );
+    }
+
+    /**
      *
      * @param \Jira\Remote\Permission $permission
      *

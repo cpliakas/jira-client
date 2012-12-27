@@ -6,7 +6,10 @@
 
 namespace Jira\Request;
 
-use \Jira\Request as Request;
+use Jira\Request;
+use Jira\Remote\Avatar as RemoteAvatar;
+use Jira\Remote\Project as RemoteProject;
+use Jira\Remote\Version as RemoteVersion;
 
 /**
  *
@@ -23,10 +26,10 @@ class Project extends Request
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#addVersion(java.lang.String, java.lang.String, com.atlassian.jira.rpc.soap.beans.RemoteVersion)
      */
-    public function addVersion(\Jira\Remote\Version $version)
+    public function addVersion(RemoteVersion $version)
     {
         $response = $this->call('addVersion', $version);
-        return new \Jira\Remote\Version($response);
+        return new RemoteVersion($response);
     }
 
     /**
@@ -65,7 +68,7 @@ class Project extends Request
     public function getComponents()
     {
         $data = $this->call('getComponents');
-        return $this->returnArray($data, '\Jira\Remote\Component');
+        return $this->returnObjectArray($data, '\Jira\Remote\Component');
     }
 
     /**
@@ -79,7 +82,7 @@ class Project extends Request
     public function getFieldsForCreate($type_id)
     {
         $data = $this->call('getFieldsForCreate', $type_id);
-        return $this->returnArray($data, '\Jira\Remote\Field');
+        return $this->returnObjectArray($data, '\Jira\Remote\Field');
     }
 
     /**
@@ -92,7 +95,7 @@ class Project extends Request
     public function getAvatar()
     {
         $data = $this->call('getProjectAvatar');
-        return new \Jira\Remote\Avatar($data);
+        return new RemoteAvatar($data);
     }
 
     /**
@@ -110,7 +113,7 @@ class Project extends Request
     public function getAvatars($include_system_avatars = TRUE)
     {
         $data = $this->call('getProjectAvatars', $include_system_avatars);
-        return $this->returnArray($data, '\Jira\Remote\Avatar');
+        return $this->returnObjectArray($data, '\Jira\Remote\Avatar');
     }
 
     /**
@@ -124,7 +127,7 @@ class Project extends Request
     public function get()
     {
         $data = $this->call('getProjectByKey');
-        return new \Jira\Remote\Project($data);
+        return new RemoteProject($data);
     }
 
     /**
@@ -138,7 +141,7 @@ class Project extends Request
     public function getVersions()
     {
         $data = $this->call('getVersions');
-        return $this->returnArray($data, '\Jira\Remote\Version');
+        return $this->returnObjectArray($data, '\Jira\Remote\Version');
     }
 
     /**
@@ -149,7 +152,7 @@ class Project extends Request
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#releaseVersion(java.lang.String, java.lang.String, com.atlassian.jira.rpc.soap.beans.RemoteVersion)
      */
-    public function releaseVersion(\Jira\Remote\Version $version)
+    public function releaseVersion(RemoteVersion $version)
     {
         return $this->call('releaseVersion', $version);
     }

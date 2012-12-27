@@ -16,7 +16,7 @@ class Request
      *
      * @var \Jira\Client
      */
-    protected $_client;
+    protected $_jiraClient;
 
     /**
      * The unique key of the item being requested.
@@ -32,15 +32,15 @@ class Request
     /**
      * Constructs a \Jira\Request object.
      *
-     * @param \Jira\Client $client
+     * @param \Jira\Client $jira_client
      *   The JIRA client object that instantiated this class.
      * @param string|null
      *   An optional unique key for this object e.g. the issue key, project key,
      *   etc. Defaults to null.
      */
-    public function __construct(Client $client, $unique_key = null)
+    public function __construct(Client $jira_client, $unique_key = null)
     {
-        $this->_client = $client;
+        $this->_jiraClient = $jira_client;
         $this->_uniqueKey = $unique_key;
     }
 
@@ -49,9 +49,9 @@ class Request
      *
      * @return \Jira\Client
      */
-    public function getClient()
+    public function getJiraClient()
     {
-        return $this->_client;
+        return $this->_jiraClient;
     }
 
     /**
@@ -86,7 +86,7 @@ class Request
           $args[0] = $this->_uniqueKey;
           array_unshift($args, $method);
         }
-        return call_user_func_array(array($this->_client, 'call'), $args);
+        return call_user_func_array(array($this->_jiraClient, 'call'), $args);
     }
 
     /**
@@ -96,15 +96,22 @@ class Request
      *   The raw data returned by \Jira\Request::call().
      * @param string $classname
      *   The name of the class used to create the objects.
+     * @param string|null $key
+     *   Optionally specify a property whose value should be used as the array
+     *   key.
      *
      * @return array
      *   Returns an array of $classname objects.
      */
-    public function returnArray(array $data, $classname)
+    public function returnObjectArray(array $data, $classname, $key = null)
     {
         $objects = array();
         foreach ($data as $object) {
-          $objects[] = new $classname($object);
+          if (null === $key) {
+              $objects[] = new $classname($object);
+          } else {
+              $objects[$object->$key] = new $classname($object);
+          }
         }
         return $objects;
     }

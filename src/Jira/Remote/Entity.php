@@ -2,6 +2,11 @@
 
 namespace Jira\Remote;
 
+
+/**
+ *
+ * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemoteEntity.html
+ */
 class Entity extends Object
 {
     /**

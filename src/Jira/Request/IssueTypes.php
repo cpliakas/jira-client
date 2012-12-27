@@ -6,7 +6,7 @@
 
 namespace Jira\Request;
 
-use \Jira\Request as Request;
+use Jira\Request;
 
 /**
  *
@@ -21,8 +21,8 @@ class IssueTypes extends Request
     public function call($method)
     {
         $args = func_get_args();
-        $data = call_user_func_array(array($this->_client, 'call'), $args);
-        return $this->returnArray($data, '\Jira\Remote\IssueType');
+        $data = call_user_func_array(array($this->_jiraClient, 'call'), $args);
+        return $this->returnObjectArray($data, '\Jira\Remote\IssueType');
     }
 
 
