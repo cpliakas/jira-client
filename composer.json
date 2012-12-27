@@ -1,0 +1,29 @@
+{
+    "name": "cpliakas/jira",
+    "type": "library",
+    "description": "A PHP client for integrating with the JIRA issue & bug tracker software.",
+    "keywords": ["jira"],
+    "homepage": "https://github.com/cpliakas/jira-client",
+    "license": "LGPL-3.0",
+    "authors": [
+        {
+            "name": "Chris Pliakas",
+            "email": "opensource@chrispliakas.com"
+        },
+    ],
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.zendframework.com/"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "zendframework/zend-soap": "2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Jira": "src/"
+        }
+    }
+}
