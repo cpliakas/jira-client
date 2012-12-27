@@ -91,8 +91,8 @@ class Issue extends Request
     }
 
     /**
-     * Adds a worklog to the issue. The issue's time spent field will be increased
-     * by the amount in \Jira\Object\Worklog::getTimeSpent().
+     * Adds a worklog to the issue. The issue's time spent field will be
+     * increased by the amount in \Jira\Object\Worklog::getTimeSpent().
      *
      * @param \Jira\Object\Worklog $worklog
      *   The worklog object.
@@ -105,9 +105,9 @@ class Issue extends Request
     }
 
     /**
-     * Adds a worklog to the given issue but leaves the issue's remaining estimate
-     * field unchanged. The issue's time spent field will be increased by the
-     * amount in \Jira\Object\Worklog::getTimeSpent().
+     * Adds a worklog to the given issue but leaves the issue's remaining
+     * estimate field unchanged. The issue's time spent field will be increased
+     * by the amount in \Jira\Object\Worklog::getTimeSpent().
      *
      * @param \Jira\Object\Worklog $worklog
      *   The worklog object.
@@ -121,8 +121,8 @@ class Issue extends Request
 
     /**
      * Adds a worklog to the given issue and sets the issue's remaining estimate
-     * field to the given value. The issue's time spent field will be increased by
-     * the amount in \Jira\Object\Worklog::getTimeSpent().
+     * field to the given value. The issue's time spent field will be increased
+     * by the amount in \Jira\Object\Worklog::getTimeSpent().
      *
      * @param \Jira\Object\Worklog $worklog
      *   The worklog object.
@@ -148,8 +148,8 @@ class Issue extends Request
      */
     public function createChildIssue(\Jira\Object\Issue $issue)
     {
-        // We cannot use \Jira\Request\Issue::call() since the issue key is passed
-        // as the last argument of the RPC call.
+        // We cannot use \Jira\Request\Issue::call() since the issue key is
+        // passed as the last argument of the RPC call.
         return $this->_client->call($issue, $this->_issueKey);
     }
 
@@ -256,9 +256,9 @@ class Issue extends Request
     }
 
     /**
-     * Determines if the logged in user has the permission to add worklogs to this
-     * issue, that timetracking is enabled in JIRA, and that this issue is in an
-     * editable workflow state.
+     * Determines if the logged in user has the permission to add worklogs to
+     * this issue, that timetracking is enabled in JIRA, and that this issue is
+     * in an editable workflow state.
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#hasPermissionToCreateWorklog(java.lang.String, java.lang.String)
      */

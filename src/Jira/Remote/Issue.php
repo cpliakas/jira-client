@@ -20,12 +20,14 @@ class Issue extends Entity
     public $affectsVersions;
 
     /**
+     * The person the issue is assigned to.
      *
      * @var string
      */
     public $assignee;
 
     /**
+     * An array of file attachment names.
      *
      * @var array
      */
@@ -39,6 +41,7 @@ class Issue extends Entity
     public $components;
 
     /**
+     * The date the issue was created in "" format.
      *
      * @var string
      */
@@ -341,5 +344,191 @@ class Issue extends Entity
     public function getVotes()
     {
         return $this->votes;
+    }
+
+    /**
+     *
+     * @param array $versions
+     *   An array of \Jira\Remote\Version objects.
+     *
+     * @return \Jira\Remote\Issue
+     */
+    public function setAffectsVersions(array $versions)
+    {
+        $this->affectsVersions = $versions;
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $assignee
+     *
+     * @return \Jira\Remote\Issue
+     */
+    public function setAssignee($assignee)
+    {
+        $this->assignee = $assignee;
+        return $this;
+    }
+
+    /**
+     *
+     * @param array $names
+     *   An array of strings containing the attachment names.
+     *
+     * @return \Jira\Remote\Issue
+     */
+    public function setAttachmentNames($names)
+    {
+        $this->attachmentNames = $names;
+        return $this;
+    }
+
+    /**
+     *
+     * @param array $components
+     *   An array of \Jira\Remote\Component objects.
+     *
+     * @return \Jira\Remote\Issue
+     */
+    public function setComponents(array $components)
+    {
+        $this->components = $components;
+        return $this;
+    }
+
+    /**
+     *
+     * @param array $values
+     *   An array of \Jira\Remote\CustomFieldValue objects.
+     *
+     * @return \Jira\Remote\Issue
+     */
+    public function setCustomFieldValues(array $values)
+    {
+        $this->customFieldValue = $values;
+    }
+
+    /**
+     *
+     * @param string $description
+     *
+     * @return \Jira\Remote\Issue
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $date
+     *
+     * @return \Jira\Remote\Issue
+     */
+    public function setDuedate($date)
+    {
+        $this->dueDate = $date;
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $environment
+     *
+     * @return \Jira\Remote\Issue
+     */
+    public function setEnvironment($environment)
+    {
+        $this->environment = $environment;
+        return $this;
+    }
+
+    /**
+     *
+     * @param array $versions
+     *   An array of \Jira\Remote\Version objects.
+     *
+     * @return \Jira\Remote\Issue
+     */
+    public function setFixVersions(array $versions)
+    {
+        $this->fixVersions = $versions;
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $priority
+     *
+     * @return \Jira\Remote\Issue
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $project
+     *
+     * @return \Jira\Remote\Issue
+     */
+    public function setProject($project)
+    {
+        $this->project = $project;
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $reporter
+     *
+     * @return \Jira\Remote\Issue
+     */
+    public function setReporter($reporter)
+    {
+        $this->reporter = $reporter;
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $summary
+     *
+     * @return \Jira\Remote\Issue
+     */
+    public function setSummary($summary)
+    {
+        $this->summary = $summary;
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $type
+     *
+     * @return \Jira\Remote\Issue
+     *
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $updated
+     *
+     * @return \Jira\Remote\Issue
+     *
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+        return $this;
     }
 }

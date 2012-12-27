@@ -33,7 +33,7 @@ class Client
     protected $_token = '';
 
     /**
-     * Constructs a Drupal_Jira_Client object.
+     * Constructs a \Jira\Client object.
      *
      * @param string $host
      *   The URL to the JIRA server.
@@ -112,7 +112,7 @@ class Client
      * Returns an issue request object.
      *
      * @param string $issue_key
-     *   The key of the issue to return, i.e "AB-123", "CD-456", etc.
+     *   The key of the issue to return, e.g. "AB-123", "CD-456".
      *
      * @return \Jira\Request\Issue
      *   The request object for the issue.
@@ -123,10 +123,21 @@ class Client
     }
 
     /**
+     * Returns an issues request object.
+     *
+     * @return \Jira\Request\Issues
+     *   The request object for the issues.
+     */
+    public function issues()
+    {
+        return new Request\Issues($this);
+    }
+
+    /**
      * Returns an issue types request object.
      *
      * @return \Jira\Request\IssueTypes
-     *   The request object for the issue types.
+     *   The request object for issue types.
      */
     public function issueTypes()
     {
@@ -134,10 +145,10 @@ class Client
     }
 
     /**
-     * Returns an project request object.
+     * Returns a project request object.
      *
      * @param string $project_key
-     *   The key of the project.
+     *   The unique key of the project, e.g "AB", "CD".
      *
      * @return \Jira\Request\Project
      *   The request object for the project.
@@ -150,9 +161,9 @@ class Client
     /**
      * Executes an RPC call to JIRA, passes the token as the first argument.
      *
-     * Most authenticated RPC calls require passing the token as the first param.
-     * This method automatically appends the token as the first param so that the
-     * application doesn't have to worry about it.
+     * Most authenticated RPC calls require passing the token as the first
+     * param. This method automatically appends the token as the first param so
+     * that the application doesn't have to worry about it.
      *
      * @param string $method
      *   The method being invoked.

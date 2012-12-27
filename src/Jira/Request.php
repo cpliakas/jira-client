@@ -7,18 +7,23 @@
 namespace Jira;
 
 /**
- *
+ * Base class for all request objects.
  */
 class Request
 {
     /**
+     * The JIRA client object that instantiated this class.
      *
      * @var \Jira\Client
      */
     protected $_client;
 
     /**
+     * The unique key of the item being requested.
      *
+     * For example, this value could be the issue or project key. For requests
+     * that don't have an associated unique key, for example the request object
+     * for issue types, this value can be set to null.
      *
      * @var string|null
      */
@@ -40,6 +45,7 @@ class Request
     }
 
     /**
+     * Returns the Jira Client object that instantiated this class.
      *
      * @return \Jira\Client
      */
