@@ -17,7 +17,7 @@ class Issue extends Entity
      *
      * @var array
      */
-    public $affectsVersions;
+    public $affectsVersions = array();
 
     /**
      * The person the issue is assigned to.
@@ -31,14 +31,14 @@ class Issue extends Entity
      *
      * @var array
      */
-    public $attachmentNames;
+    public $attachmentNames = array();
 
     /**
      * An array of \Jira\Remote\Component objects.
      *
      * @var array
      */
-    public $components;
+    public $components = array();
 
     /**
      * The date the issue was created in "" format.
@@ -52,7 +52,7 @@ class Issue extends Entity
      *
      * @var array
      */
-    public $customFieldValues;
+    public $customFieldValues = array();
 
     /**
      *
@@ -77,7 +77,7 @@ class Issue extends Entity
      *
      * @var array
      */
-    public $fixVersions;
+    public $fixVersions = array();
 
     /**
      *
@@ -122,8 +122,9 @@ class Issue extends Entity
     public $summary;
 
     /**
+     * The numeric ID of the issue type.
      *
-     * @var string
+     * @var int
      */
     public $type;
 
@@ -162,6 +163,23 @@ class Issue extends Entity
                 'array' => true,
             ),
         );
+    }
+
+    /**
+     * Creates an issue using this remote object.
+     *
+     * @param \Jira\Client $jira_client
+     *   The JIRA client object.
+     *
+     * @return \Jira\Remote\Issue
+     */
+    public function create(\Jira\Client $jira_client)
+    {
+        if (!isset($this->key)) {
+            return $jira_client->issue()->create($this);
+        } else {
+            throw new Exception('Issue cannot be created: Issue key is already set.');
+        }
     }
 
     /**
@@ -321,7 +339,8 @@ class Issue extends Entity
 
     /**
      *
-     * @return string
+     * @return int
+     *   Returns the numeric ID of the issue type.
      */
     public function getType()
     {
@@ -508,7 +527,8 @@ class Issue extends Entity
 
     /**
      *
-     * @param string $type
+     * @param int $type
+     *   The numeric ID of the issue type.
      *
      * @return \Jira\Remote\Issue
      *

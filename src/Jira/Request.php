@@ -6,6 +6,8 @@
 
 namespace Jira;
 
+use Exception;
+
 /**
  * Base class for all request objects.
  */
@@ -28,6 +30,13 @@ class Request
      * @var string|null
      */
     protected $_uniqueKey;
+
+    /**
+     * A boolean flagging whether the unique key is required.
+     *
+     * @var bool
+     */
+    protected $_uniqueKeyRequired = true;
 
     /**
      * Constructs a \Jira\Request object.
@@ -83,8 +92,10 @@ class Request
     public function call($method) {
         $args = func_get_args();
         if (null !== $this->_uniqueKey) {
-          $args[0] = $this->_uniqueKey;
-          array_unshift($args, $method);
+            $args[0] = $this->_uniqueKey;
+            array_unshift($args, $method);
+        } elseif ($this->_uniqueKeyRequired) {
+            throw new Exception('Method "' . $method . '" requires a unique key to be passed as an argument.');
         }
         return call_user_func_array(array($this->_jiraClient, 'call'), $args);
     }

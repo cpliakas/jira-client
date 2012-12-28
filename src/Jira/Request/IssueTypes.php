@@ -14,6 +14,11 @@ use Jira\Request;
 class IssueTypes extends Request
 {
     /**
+     * Unique keys are not required.
+     */
+    protected $_uniqueKeyRequired = false;
+
+    /**
      * Overrides \Jira\Request:call().
      *
      * Returns all data as arrays of \Jira\Remote\IssueType objects.
@@ -22,7 +27,7 @@ class IssueTypes extends Request
     {
         $args = func_get_args();
         $data = call_user_func_array(array($this->_jiraClient, 'call'), $args);
-        return $this->returnObjectArray($data, '\Jira\Remote\IssueType');
+        return $this->returnObjectArray($data, '\Jira\Remote\IssueType', 'id');
     }
 
 

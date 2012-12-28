@@ -7,10 +7,15 @@
 
 namespace Jira;
 
+use Jira\Remote\Issue as RemoteIssue;
+use Jira\Remote\PermissionScheme as RemotePermissionScheme;
+use Jira\Remote\Scheme as RemoteScheme;
+use Jira\Remote\User as RemoteUser;
 use Jira\Request\Issue;
 use Jira\Request\Issues;
 use Jira\Request\IssueTypes;
 use Jira\Request\Project;
+use Jira\Request\User;
 use Zend\Soap\Client as SoapClient;
 
 /**
@@ -117,12 +122,13 @@ class Client
      * Returns an issue request object.
      *
      * @param string $issue_key
-     *   The key of the issue to return, e.g. "AB-123", "CD-456".
+     *   The key of the issue to return, e.g. "AB-123", "CD-456". Defaults to
+     *   null, which is useful for creating a new issue.
      *
      * @return \Jira\Request\Issue
      *   The request object for the issue.
      */
-    public function issue($issue_key)
+    public function issue($issue_key = null)
     {
         return new Issue($this, $issue_key);
     }
@@ -161,6 +167,20 @@ class Client
     public function project($project_key)
     {
         return new Project($this, $project_key);
+    }
+
+    /**
+     * Returns a user request object.
+     *
+     * @param string $username
+     *   The unique machine name of the user.
+     *
+     * @return \Jira\Request\User
+     *   The request object for the user.
+     */
+    public function user($username)
+    {
+        return new User($this, $username);
     }
 
     /**

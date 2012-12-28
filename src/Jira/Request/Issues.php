@@ -14,6 +14,11 @@ use Jira\Request;
 class Issues extends Request
 {
     /**
+     * Unique keys are not required.
+     */
+    protected $_uniqueKeyRequired = false;
+
+    /**
      * Overrides \Jira\Request:call().
      *
      * Returns all data as arrays of \Jira\Remote\Issue objects.

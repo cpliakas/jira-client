@@ -7,8 +7,10 @@
 namespace Jira\Request;
 
 use Jira\Request;
-use Jira\Remote\Avatar as RemoteAvatar;
+use Jira\Remote\Avatar as RemoteAvatar;;
+use Jira\Remote\PermissionScheme as RemotePermissionScheme;
 use Jira\Remote\Project as RemoteProject;
+use Jira\Remote\Scheme as RemoteScheme;
 use Jira\Remote\Version as RemoteVersion;
 
 /**
@@ -45,6 +47,34 @@ class Project extends Request
     public function archiveVersion($name, $archive)
     {
         return $this->call('archiveVersion', $name, $archive);
+    }
+
+    /**
+     * Creates a project.
+     *
+     * @param string $name
+     *   The name of the new project.
+     * @param string $description
+     *   The description of the new project.
+     * @param string $url
+     *   The URL of the new project.
+     * @param string $lead
+     *   The username of the project lead.
+     * @param \Jira\Remote\PermissionScheme|null $permission_scheme
+     *   The permission scheme to use for the new project.
+     * @param \Jira\Remote\Scheme|null $notification_scheme
+     *   The notification scheme to use on the new project.
+     * @param \Jira\Remote\Scheme|null $security_scheme
+     *   The issue security scheme to use on the new project.
+     *
+     * @return \Jira\Remote\Project
+     *
+     * @see assian/jira/rpc/soap/JiraSoapService.html#createProject(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, com.atlassian.jira.rpc.soap.beans.RemotePermissionScheme, com.atlassian.jira.rpc.soap.beans.RemoteScheme, com.atlassian.jira.rpc.soap.beans.RemoteScheme)
+     */
+    public function create($name, $description, $url, $lead, RemotePermissionScheme $permission_scheme = null, RemoteScheme $notification_scheme = null, RemoteScheme $security_scheme = null)
+    {
+        $data = $this->call('createProject', $name, $description, $url, $lead, $permission_scheme, $notification_scheme, $security_scheme);
+        return new RemoteProject($data);
     }
 
     /**

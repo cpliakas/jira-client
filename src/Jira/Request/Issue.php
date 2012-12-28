@@ -6,6 +6,7 @@
 
 namespace Jira\Request;
 
+use Exception;
 use Jira\Request;
 use Jira\Remote\Comment as RemoteComment;
 use Jira\Remote\Issue as RemoteIssue;
@@ -16,42 +17,6 @@ use Jira\Remote\Worklog as RemoteWorklog;
  */
 class Issue extends Request
 {
-    /**
-     * Returns information about the issue.
-     *
-     * @return \Jira\Remote\Issue
-     *
-     * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#getIssue(java.lang.String, java.lang.String)
-     */
-    public function get()
-    {
-        $data = $this->call('getIssue');
-        return new RemoteIssue($data);
-    }
-
-    /**
-     * Deletes the issue.
-     *
-     * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#deleteIssue(java.lang.String, java.lang.String)
-     */
-    public function delete()
-    {
-        return $this->call('deleteIssue');
-    }
-
-    /**
-     * Updates the issue with new values.
-     *
-     * @param array $field_values
-     *   An array of \Jira\Remote\FieldValue objects.
-     *
-     * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#updateIssue(java.lang.String, java.lang.String, com.atlassian.jira.rpc.soap.beans.RemoteFieldValue[])
-     */
-    public function update(array $field_values)
-    {
-        return $this->call('updateIssue', $field_values);
-    }
-
     /**
      * Uploads an attachment to the issue with the specified issue key.
      *
@@ -144,6 +109,25 @@ class Issue extends Request
     }
 
     /**
+     * Creates an issue.
+     *
+     * @param \Jira\Remote\Issue
+     *   The issue object used to create the issue.
+     *
+     * @return \Jira\Remote\Issue
+     *   The updated issue object.
+     *
+     * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#createIssue(java.lang.String, com.atlassian.jira.rpc.soap.beans.RemoteIssue)
+     */
+    public function create(RemoteIssue $issue)
+    {
+        // We cannot use \Jira\Request\Issue::call() since the issue key is
+        // irrelevant and likely not to be set anyways.
+        $data = $this->_jiraClient->call('createIssue', $issue);
+        return new RemoteIssue($data);
+    }
+
+    /**
      * Creates an issue based on the passed details and makes it a child (e.g.
      * subtask) of this issue.
      *
@@ -156,7 +140,12 @@ class Issue extends Request
     {
         // We cannot use \Jira\Request\Issue::call() since the issue key is
         // passed as the last argument of the RPC call.
-        return $this->_jiraClient->call($issue, $this->_uniqueKey);
+        $method = 'createChildIssue';
+        if ($this->_uniqueKey) {
+            return $this->_jiraClient->call($method, $issue, $this->_uniqueKey);
+        } else {
+            throw new Exception('Method "' . $method . '" requires a unique key to be passed as an argument.');
+        }
     }
 
     /**
@@ -174,7 +163,35 @@ class Issue extends Request
     {
         // We cannot use \Jira\Request\Issue::call() since the issue key is passed
         // as the third argument of the RPC call.
-        return $this->_jiraClient->call($issue, $this->_uniqueKey, $security_level);
+        $method = 'createChildIssueWithSecurityLevel';
+        if ($this->_uniqueKey) {
+            return $this->_jiraClient->call($method, $issue, $this->_uniqueKey, $security_level);
+        } else {
+            throw new Exception('Method "' . $method . '" requires a unique key to be passed as an argument.');
+        }
+    }
+
+    /**
+     * Deletes the issue.
+     *
+     * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#deleteIssue(java.lang.String, java.lang.String)
+     */
+    public function delete()
+    {
+        return $this->call('deleteIssue');
+    }
+
+    /**
+     * Returns information about the issue.
+     *
+     * @return \Jira\Remote\Issue
+     *
+     * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#getIssue(java.lang.String, java.lang.String)
+     */
+    public function get()
+    {
+        $data = $this->call('getIssue');
+        return new RemoteIssue($data);
     }
 
     /**
@@ -287,5 +304,18 @@ class Issue extends Request
     public function progressWorkflowAction($action_id, array $fields = array())
     {
         return $this->call('progressWorkflowAction', $action_id, $fields);
+    }
+
+    /**
+     * Updates the issue with new values.
+     *
+     * @param array $field_values
+     *   An array of \Jira\Remote\FieldValue objects.
+     *
+     * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#updateIssue(java.lang.String, java.lang.String, com.atlassian.jira.rpc.soap.beans.RemoteFieldValue[])
+     */
+    public function update(array $field_values)
+    {
+        return $this->call('updateIssue', $field_values);
     }
 }

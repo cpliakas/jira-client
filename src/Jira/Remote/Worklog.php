@@ -10,7 +10,7 @@ namespace Jira\Remote;
  *
  * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemoteWorklog.html
  */
-class Worklog extends Entity
+class Worklog extends Object
 {
 
     /**
