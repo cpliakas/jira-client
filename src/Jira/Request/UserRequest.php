@@ -14,27 +14,6 @@ use Jira\Remote\RemoteUser;
 class UserRequest extends JiraRequest
 {
     /**
-     * Creates a user.
-     *
-     * @param string $password
-     *   The user's raw password.
-     * @param string $fullname
-     *   The full real name of the user.
-     * @param string $email
-     *   The user's email address.
-     *
-     * @return \Jira\Remote\RemoteUser
-     *   The updated user object.
-     *
-     * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#createUser(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
-     */
-    public function create($password, $fullname, $email)
-    {
-        $data = $this->call('createUser', $password, $fullname, $email);
-        return new RemoteUser($data);
-    }
-
-    /**
      * Deletes the user.
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#deleteUser(java.lang.String, java.lang.String)

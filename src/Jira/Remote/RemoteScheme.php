@@ -76,7 +76,7 @@ class RemoteScheme extends RemoteObject
      *
      * @param int $id
      *
-     * @return \Jira\Remote\RemoteScheme
+     * @return RemoteScheme
      */
     public function setId($id)
     {
@@ -88,7 +88,7 @@ class RemoteScheme extends RemoteObject
      *
      * @param string $name
      *
-     * @return \Jira\Remote\RemoteScheme
+     * @return RemoteScheme
      *
      */
     public function setName($name) {
@@ -100,7 +100,7 @@ class RemoteScheme extends RemoteObject
      *
      * @param string $description
      *
-     * @return \Jira\Remote\RemoteScheme
+     * @return RemoteScheme
      *
      */
     public function setDescription($description)
@@ -113,7 +113,7 @@ class RemoteScheme extends RemoteObject
      *
      * @param string $type
      *
-     * @return \Jira\Remote\RemoteScheme
+     * @return RemoteScheme
      *
      */
     public function setType($type) {

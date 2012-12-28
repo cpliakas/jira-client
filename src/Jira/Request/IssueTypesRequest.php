@@ -12,14 +12,9 @@ namespace Jira\Request;
 class IssueTypesRequest extends JiraRequest
 {
     /**
-     * Unique keys are not required.
-     */
-    protected $_uniqueKeyRequired = false;
-
-    /**
-     * Overrides \Jira\Request\JiraRequest:call().
+     * Overrides JiraRequest:call().
      *
-     * Returns all data as arrays of \Jira\Remote\RemoteIssueType objects.
+     * Returns all data as arrays of RemoteIssueType objects.
      */
     public function call($method)
     {
@@ -33,7 +28,7 @@ class IssueTypesRequest extends JiraRequest
      * Returns an array of all the issue types for all projects in JIRA.
      *
      * @return array
-     *   An array of \Jira\Remote\RemoteIssueType objects.
+     *   An array of RemoteIssueType objects.
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#getIssue(java.lang.String, java.lang.String)
      */
@@ -50,7 +45,7 @@ class IssueTypesRequest extends JiraRequest
      *   The ID of the project.
      *
      * @return array
-     *   An array of \Jira\Remote\RemoteIssueType objects.
+     *   An array of RemoteIssueType objects.
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#getIssueTypesForProject(java.lang.String, java.lang.String)
      */

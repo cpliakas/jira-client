@@ -13,14 +13,14 @@ namespace Jira\Remote;
 class RemotePermissionScheme extends RemoteScheme
 {
     /**
-     * An array of \Jira\Remote\RemotePermissionMapping objects.
+     * An array of RemotePermissionMapping objects.
      *
      * @var array
      */
      public $permissionMappings = array();
 
     /**
-     * Overrides \Jira\Remote\RemoteObject::objectMappings().
+     * Overrides RemoteObject::objectMappings().
      */
     public function objectMappings()
     {
@@ -34,12 +34,12 @@ class RemotePermissionScheme extends RemoteScheme
 
     /**
      *
-     * @param \Jira\Remote\RemotePermission $permission
+     * @param RemotePermission $permission
      *
      * @param array $entities
-     *   An array of \Jira\Remote\RemoteEntity objects.
+     *   An array of RemoteEntity objects.
      *
-     * @return Jira\Remote\RemotePermissionScheme
+     * @return RemotePermissionScheme
      */
     public function addPermissionMapping(RemotePermission $permission, array $entities)
     {
@@ -56,7 +56,7 @@ class RemotePermissionScheme extends RemoteScheme
     /**
      *
      * @return array
-     *   An array of \Jira\Remote\RemotePermissionMapping objects.
+     *   An array of RemotePermissionMapping objects.
      */
     public function getPermissionMappings()
     {
@@ -79,7 +79,7 @@ class RemotePermissionScheme extends RemoteScheme
     /**
      *
      * @param array $mappings
-     *   An array of \Jira\Remote\RemotePermissionMapping objects.
+     *   An array of RemotePermissionMapping objects.
      *
      * @return Jira\Remote\RemotePermissionScheme
      */

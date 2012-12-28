@@ -46,7 +46,7 @@ class RemoteConstant extends RemoteNamedEntity
      *
      * @param string $description
      *
-     * @return \Jira\Remote\RemoteConstant
+     * @return RemoteConstant
      */
     public function setDescription($description)
     {
@@ -58,7 +58,7 @@ class RemoteConstant extends RemoteNamedEntity
      *
      * @param string $icon
      *
-     * @return \Jira\Remote\RemoteConstant
+     * @return RemoteConstant
      */
     public function setIcon($icon)
     {

@@ -7,12 +7,13 @@
 
 namespace Jira;
 
+use Jira\Remote\CreatableInterface;
 use Jira\Request\IssueRequest;
 use Jira\Request\IssuesRequest;
 use Jira\Request\IssueTypesRequest;
 use Jira\Request\ProjectRequest;
 use Jira\Request\UserRequest;
-use Zend\Soap\Client as SoapClient;
+use Zend\Soap\Client as ZendSoapClient;
 
 /**
  * Wrapper around the Zend SOAP client connected to a JIRA instance.
@@ -27,7 +28,7 @@ class JiraClient
     /**
      * The SOAP object.
      *
-     * @var \Zend\Soap\Client
+     * @var ZendSoapClient
      */
     protected $_soapClient;
 
@@ -39,17 +40,17 @@ class JiraClient
     protected $_token = '';
 
     /**
-     * Constructs a \Jira\Client object.
+     * Constructs a JiraClient object.
      *
      * @param string $host
      *   The URL to the JIRA server.
      * @param array $options
-     *   An array of options to pass to \Zend\Soap\Client.
+     *   An array of options to pass to ZendSoapClient.
      */
     public function __construct($host, array $options = array())
     {
         $wsdl = rtrim($host, '/') . self::WSDL;
-        $this->_soapClient = new SoapClient($wsdl, $options);
+        $this->_soapClient = new ZendSoapClient($wsdl, $options);
     }
 
     /**
@@ -78,7 +79,7 @@ class JiraClient
     /**
      * Returns the SOAP client.
      *
-     * @return \Zend\Soap\Client
+     * @return ZendSoapClient
      *   The instantiated SOAP client.
      */
     function getSoapClient()
@@ -115,16 +116,27 @@ class JiraClient
     }
 
     /**
+     * Creates an object via an API call.
+     *
+     * @param CreatableInterface $remote_object
+     *
+     * @return CreatableInterface
+     */
+    public function create(CreatableInterface $remote_object)
+    {
+        return $remote_object->create($this);
+    }
+
+    /**
      * Returns an issue request object.
      *
      * @param string $issue_key
-     *   The key of the issue to return, e.g. "AB-123", "CD-456". Defaults to
-     *   null, which is useful for creating a new issue.
+     *   The key of the issue to return, e.g. "AB-123", "CD-456".
      *
-     * @return \Jira\Request\IssueRequest
+     * @return IssueRequest
      *   The request object for the issue.
      */
-    public function issue($issue_key = null)
+    public function issue($issue_key)
     {
         return new IssueRequest($this, $issue_key);
     }
@@ -132,7 +144,7 @@ class JiraClient
     /**
      * Returns an issues request object.
      *
-     * @return \Jira\Request\IssuesRequest
+     * @return IssuesRequest
      *   The request object for the issues.
      */
     public function issues()
@@ -143,7 +155,7 @@ class JiraClient
     /**
      * Returns an issue types request object.
      *
-     * @return \Jira\Request\IssueTypesRequest
+     * @return IssueTypesRequest
      *   The request object for issue types.
      */
     public function issueTypes()
@@ -157,7 +169,7 @@ class JiraClient
      * @param string $project_key
      *   The unique key of the project, e.g "AB", "CD".
      *
-     * @return \Jira\Request\ProjectRequest
+     * @return ProjectRequest
      *   The request object for the project.
      */
     public function project($project_key)
@@ -171,7 +183,7 @@ class JiraClient
      * @param string $username
      *   The unique machine name of the user.
      *
-     * @return \Jira\Request\UserRequest
+     * @return UserRequest
      *   The request object for the user.
      */
     public function user($username)

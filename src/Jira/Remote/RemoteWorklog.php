@@ -187,7 +187,7 @@ class RemoteWorklog extends RemoteObject
      *
      * @param string $comment
      *
-     * @return \Jira\Remote\RemoteWorklog
+     * @return RemoteWorklog
      */
     public function setComment($comment)
     {
@@ -199,7 +199,7 @@ class RemoteWorklog extends RemoteObject
      *
      * @param string $group_level
      *
-     * @return \Jira\Remote\RemoteWorklog
+     * @return RemoteWorklog
      */
     public function setGroupLevel($group_level)
     {
@@ -211,7 +211,7 @@ class RemoteWorklog extends RemoteObject
      *
      * @param string $id
      *
-     * @return \Jira\Remote\RemoteWorklog
+     * @return RemoteWorklog
      */
     public function setId($id)
     {
@@ -223,7 +223,7 @@ class RemoteWorklog extends RemoteObject
      *
      * @param string $id
      *
-     * @return \Jira\Remote\RemoteWorklog
+     * @return RemoteWorklog
      */
     public function setRoleLevelId($id)
     {
@@ -235,7 +235,7 @@ class RemoteWorklog extends RemoteObject
      *
      * @param string $date
      *
-     * @return \Jira\Remote\RemoteWorklog
+     * @return RemoteWorklog
      */
     public function setStartDate($date)
     {
@@ -252,7 +252,7 @@ class RemoteWorklog extends RemoteObject
      *   - days: "3d", "10d", "120d"
      *   - weeks: "3w", "10w", "120w"
      *
-     * @return \Jira\Remote\RemoteWorklog
+     * @return RemoteWorklog
      */
     public function setTimeSpent($time_spent)
     {

@@ -6,7 +6,6 @@
 
 namespace Jira\Request;
 
-use Exception;
 use Jira\JiraClient;
 
 /**
@@ -17,7 +16,7 @@ class JiraRequest
     /**
      * The JIRA client object that instantiated this class.
      *
-     * @var \Jira\JiraClient
+     * @var JiraClient
      */
     protected $_jiraClient;
 
@@ -33,16 +32,9 @@ class JiraRequest
     protected $_uniqueKey;
 
     /**
-     * A boolean flagging whether the unique key is required.
+     * Constructs a JiraRequest object.
      *
-     * @var bool
-     */
-    protected $_uniqueKeyRequired = true;
-
-    /**
-     * Constructs a \Jira\Request\JiraRequest object.
-     *
-     * @param \Jira\JiraClient $jira_client
+     * @param JiraClient $jira_client
      *   The JIRA client object that instantiated this class.
      * @param string|null
      *   An optional unique key for this object e.g. the issue key, project key,
@@ -57,7 +49,7 @@ class JiraRequest
     /**
      * Returns the Jira Client object that instantiated this class.
      *
-     * @return \Jira\JiraClient
+     * @return JiraClient
      */
     public function getJiraClient()
     {
@@ -77,9 +69,9 @@ class JiraRequest
     }
 
     /**
-     * Wrapper around \Jira\Client::call() that adds the objects unique key as
-     * the second argument of the RPC call. For example, issue requests require
-     * the issue key, project requests require the project key, etc.
+     * Wrapper around Client::call() that adds the objects unique key as the
+     * second argument of the RPC call. For example, issue requests require the
+     * issue key, project requests require the project key, etc.
      *
      * @param string $method
      *   The method being invoked.
@@ -95,8 +87,6 @@ class JiraRequest
         if (null !== $this->_uniqueKey) {
             $args[0] = $this->_uniqueKey;
             array_unshift($args, $method);
-        } elseif ($this->_uniqueKeyRequired) {
-            throw new Exception('Method "' . $method . '" requires a unique key to be passed as an argument.');
         }
         return call_user_func_array(array($this->_jiraClient, 'call'), $args);
     }
@@ -105,7 +95,7 @@ class JiraRequest
      * Helper function that returns an array of objects.
      *
      * @param array $data
-     *   The raw data returned by \Jira\Request\JiraRequest::call().
+     *   The raw data returned by JiraRequest::call().
      * @param string $classname
      *   The name of the class used to create the objects.
      * @param string|null $key

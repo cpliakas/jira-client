@@ -46,7 +46,7 @@ class RemotePermission extends RemoteObject
      *
      * @param string $name
      *
-     * @return \Jira\Remote\RemotePermission
+     * @return RemotePermission
      *
      */
     public function setName($name)
@@ -59,7 +59,7 @@ class RemotePermission extends RemoteObject
      *
      * @param string $permission
      *
-     * @return \Jira\Remote\RemotePermission
+     * @return RemotePermission
      *
      */
     public function setPermission($permission)

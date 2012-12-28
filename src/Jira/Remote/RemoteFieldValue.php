@@ -46,7 +46,7 @@ class RemoteFieldValue extends RemoteObject
      *
      * @param string $id
      *
-     * @return \Jira\Remote\RemoteFieldValue
+     * @return RemoteFieldValue
      */
     public function setId($id)
     {
@@ -58,7 +58,7 @@ class RemoteFieldValue extends RemoteObject
      *
      * @param array $values
      *
-     * @return \Jira\Remote\RemoteFieldValue
+     * @return RemoteFieldValue
      */
     public function setValues(array $values)
     {

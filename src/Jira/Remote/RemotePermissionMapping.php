@@ -14,20 +14,20 @@ class RemotePermissionMapping extends RemoteObject
 {
     /**
      *
-     * @var \Jira\Remote\RemotePermission
+     * @var RemotePermission
      *
      */
     public $permission;
 
     /**
-     * An array of \Jira\Remote\RemoteEntity objects.
+     * An array of RemoteEntity objects.
      *
      * @var array
      */
     public $entities = array();
 
     /**
-     * Overrides \Jira\Remote\RemoteObject::objectMappings().
+     * Overrides RemoteObject::objectMappings().
      */
     public function objectMappings()
     {
@@ -45,7 +45,7 @@ class RemotePermissionMapping extends RemoteObject
 
     /**
      *
-     * @return \Jira\Remote\RemotePermission
+     * @return RemotePermission
      */
     public function getPermission()
     {
@@ -55,7 +55,7 @@ class RemotePermissionMapping extends RemoteObject
     /**
      *
      * @return array
-     *   An array of \Jira\Remote\RemoteEntity objects.
+     *   An array of RemoteEntity objects.
      */
     public function getRemoteEntities()
     {
@@ -65,9 +65,9 @@ class RemotePermissionMapping extends RemoteObject
 
     /**
      *
-     * @param \Jira\Remote\RemotePermission $permission
+     * @param RemotePermission $permission
      *
-     * @return \Jira\Remote\RemotePermissionMapping
+     * @return RemotePermissionMapping
      *
      */
     public function setPermission(RemotePermission $permission)
@@ -79,9 +79,9 @@ class RemotePermissionMapping extends RemoteObject
     /**
      *
      * @param array $entities
-     *   An array of \Jira\Remote\RemoteEntity objects.
+     *   An array of RemoteEntity objects.
      *
-     * @return \Jira\Remote\RemotePermissionMapping
+     * @return RemotePermissionMapping
      *
      */
     public function setRemoteEntities(array $entities)

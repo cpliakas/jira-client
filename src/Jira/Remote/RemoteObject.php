@@ -14,7 +14,7 @@ use InvalidArgumentException;
 class RemoteObject
 {
     /**
-     * Constructs a \Jira\Remote\RemoteObject object.
+     * Constructs a RemoteObject object.
      *
      * @param stdClass|array
      *   The data returned by the RPC call.
@@ -54,7 +54,7 @@ class RemoteObject
      * Helper function that builds an array of objects.
      *
      * @param array $data
-     *   The raw data returned by \Jira\Request::call().
+     *   The raw data returned by Request::call().
      * @param string $classname
      *   The name of the class used to create the objects.
      *
@@ -74,8 +74,7 @@ class RemoteObject
      * Returns an array of object mappings.
      *
      * Data is returned in primitive structures from the SOAP client. This maps
-     * the keys and properties to the corresponding \Jira\Remote\RemoteObject
-     * objects.
+     * the keys and properties to the corresponding RemoteObject objects.
      *
      * @return array
      *   An associative array keyed by property name to an associative array

@@ -28,7 +28,7 @@ class RemoteEntity extends RemoteObject
      *
      * @param string $id
      *
-     * @return \Jira\Remote\RemoteEntity
+     * @return RemoteEntity
      */
     public function setId($id)
     {

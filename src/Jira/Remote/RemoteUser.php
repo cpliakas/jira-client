@@ -6,11 +6,13 @@
 
 namespace Jira\Remote;
 
+use Jira\JiraClient;
+
 /**
  *
  * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemoteUser.html
  */
-class RemoteUser extends RemoteObject
+class RemoteUser extends RemoteObject implements CreatableInterface
 {
     /**
      *
@@ -29,6 +31,23 @@ class RemoteUser extends RemoteObject
      * @var string
      */
     public $name;
+
+    /**
+     *
+     * @var string
+     */
+    protected $_password;
+
+    /**
+     * Implements CreatableInterface::create().
+     *
+     * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#createUser(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+     */
+    public function create(JiraClient $jira_client)
+    {
+        $data = $jira_client->call('createUser', $this->name, $this->_password, $this->fullname, $this->email);
+        return new RemoteUser($data);
+    }
 
     /**
      *
@@ -61,7 +80,7 @@ class RemoteUser extends RemoteObject
      *
      * @param string $email
      *
-     * @return \Jira\Remote\RemoteUser
+     * @return RemoteUser
      */
     public function setEmail($email)
     {
@@ -73,7 +92,7 @@ class RemoteUser extends RemoteObject
      *
      * @param string $fullname
      *
-     * @return \Jira\Remote\RemoteUser
+     * @return RemoteUser
      */
     public function setFullname($fullname)
     {
@@ -85,11 +104,23 @@ class RemoteUser extends RemoteObject
      *
      * @param string $name
      *
-     * @return \Jira\Remote\RemoteUser
+     * @return RemoteUser
      */
     public function setName($name)
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     *
+     * @param string $password
+     *
+     * @return RemoteUser
+     */
+    public function setPassword($password)
+    {
+        $this->_password = $password;
         return $this;
     }
 }

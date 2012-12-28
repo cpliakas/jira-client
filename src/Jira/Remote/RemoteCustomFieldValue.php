@@ -61,7 +61,7 @@ class RemoteCustomFieldValue extends RemoteObject
      *
      * @param string $id
      *
-     * @return \Jira\Remote\RemoteCustomFieldValue
+     * @return RemoteCustomFieldValue
      */
     public function setCustomfieldId($id)
     {
@@ -73,7 +73,7 @@ class RemoteCustomFieldValue extends RemoteObject
      *
      * @param string $key
      *
-     * @return \Jira\Remote\RemoteCustomFieldValue
+     * @return RemoteCustomFieldValue
      */
     public function setKey($key)
     {
@@ -85,7 +85,7 @@ class RemoteCustomFieldValue extends RemoteObject
      *
      * @param array $values
      *
-     * @return \Jira\Remote\RemoteCustomFieldValue
+     * @return RemoteCustomFieldValue
      */
     public function setValues($values)
     {

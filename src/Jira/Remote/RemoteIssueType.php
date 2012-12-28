@@ -32,7 +32,7 @@ class RemoteIssueType extends RemoteConstant
    *
    * @param bool $sub_task
    *
-   * @return \Jira\Remote\RemoteIssueType
+   * @return RemoteIssueType
    */
   public function setSubTask($sub_task)
   {

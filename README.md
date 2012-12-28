@@ -52,12 +52,12 @@ Creating an issue
     use Jira\Remote\RemoteIssue;
 
     $issue = new RemoteIssue();
-
     $issue
         ->setProject('AB')
         ->setType(1) // ID can be found via $jira->issueTypes()->get().
         ->setSummary('Issue created via the API')
-        ->setDescription('This is a test issue created throug the API')
-        ->create($jira);
+        ->setDescription('This is a test issue created throug the API');
+
+    $jira->create($issue);
 
     ?>

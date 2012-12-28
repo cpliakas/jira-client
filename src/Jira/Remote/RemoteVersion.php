@@ -77,7 +77,7 @@ class RemoteVersion extends RemoteNamedEntity
      *
      * @param bool $archived
      *
-     * @return \Jira\Remote\RemoteVersion
+     * @return RemoteVersion
      */
     public function setArchived($archived)
     {
@@ -89,7 +89,7 @@ class RemoteVersion extends RemoteNamedEntity
      *
      * @param bool $released
      *
-     * @return \Jira\Remote\RemoteVersion
+     * @return RemoteVersion
      */
     public function setReleased($released)
     {
@@ -102,7 +102,7 @@ class RemoteVersion extends RemoteNamedEntity
      * @param string $release_date
      *   The release date e.g. "1982-03-19T00:00:00.000Z".
      *
-     * @return \Jira\Remote\RemoteVersion
+     * @return RemoteVersion
      */
     public function setReleaseDate($release_date)
     {
@@ -114,7 +114,7 @@ class RemoteVersion extends RemoteNamedEntity
      *
      * @param int $sequence
      *
-     * @return \Jira\Remote\RemoteVersion
+     * @return RemoteVersion
      */
     public function setSequence($sequence)
     {

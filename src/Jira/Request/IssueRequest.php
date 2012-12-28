@@ -24,7 +24,7 @@ class IssueRequest extends JiraRequest
      * @param array $filedata
      *   A Base 64 encoded string of the attachment to be uploaded.
      *
-     * @see \Jira\Request\IssueRequest::addAttachments()
+     * @see IssueRequest::addAttachments()
      */
     public function addAttachment($filename, $filedata)
     {
@@ -50,7 +50,7 @@ class IssueRequest extends JiraRequest
     /**
      * Adds a comment to the specified issue.
      *
-     * @param \Jira\Remote\RemoteComment $comment
+     * @param RemoteComment $comment
      *   The new comment to add.
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#addComment(java.lang.String, java.lang.String, com.atlassian.jira.rpc.soap.beans.RemoteComment)
@@ -62,9 +62,9 @@ class IssueRequest extends JiraRequest
 
     /**
      * Adds a worklog to the issue. The issue's time spent field will be
-     * increased by the amount in \Jira\Remote\RemoteWorklog::getTimeSpent().
+     * increased by the amount in RemoteWorklog::getTimeSpent().
      *
-     * @param \Jira\Remote\RemoteWorklog $worklog
+     * @param RemoteWorklog $worklog
      *   The worklog object.
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#addWorklogAndAutoAdjustRemainingEstimate(java.lang.String, java.lang.String, com.atlassian.jira.rpc.soap.beans.RemoteWorklog)
@@ -77,9 +77,9 @@ class IssueRequest extends JiraRequest
     /**
      * Adds a worklog to the given issue but leaves the issue's remaining
      * estimate field unchanged. The issue's time spent field will be increased
-     * by the amount in \Jira\Remote\RemoteWorklog::getTimeSpent().
+     * by the amount in RemoteWorklog::getTimeSpent().
      *
-     * @param \Jira\Remote\RemoteWorklog $worklog
+     * @param RemoteWorklog $worklog
      *   The worklog object.
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#addWorklogAndRetainRemainingEstimate(java.lang.String, java.lang.String, com.atlassian.jira.rpc.soap.beans.RemoteWorklog)
@@ -92,9 +92,9 @@ class IssueRequest extends JiraRequest
     /**
      * Adds a worklog to the given issue and sets the issue's remaining estimate
      * field to the given value. The issue's time spent field will be increased
-     * by the amount in \Jira\Remote\RemoteWorklog::getTimeSpent().
+     * by the amount in RemoteWorklog::getTimeSpent().
      *
-     * @param \Jira\Remote\RemoteWorklog $worklog
+     * @param RemoteWorklog $worklog
      *   The worklog object.
      * @param string $estimate
      *   The new value for the issue's remaining estimate as a duration string,
@@ -108,37 +108,18 @@ class IssueRequest extends JiraRequest
     }
 
     /**
-     * Creates an issue.
-     *
-     * @param \Jira\Remote\RemoteIssue
-     *   The issue object used to create the issue.
-     *
-     * @return \Jira\Remote\RemoteIssue
-     *   The updated issue object.
-     *
-     * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#createIssue(java.lang.String, com.atlassian.jira.rpc.soap.beans.RemoteIssue)
-     */
-    public function create(RemoteIssue $issue)
-    {
-        // We cannot use \Jira\Request\IssueRequest::call() since the issue key
-        // is irrelevant and likely not to be set anyways.
-        $data = $this->_jiraClient->call('createIssue', $issue);
-        return new RemoteIssue($data);
-    }
-
-    /**
      * Creates an issue based on the passed details and makes it a child (e.g.
      * subtask) of this issue.
      *
-     * @param \Jira\Remote\RemoteIssue $issue
+     * @param RemoteIssue $issue
      *   The new issue to create.
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#createIssueWithParent(java.lang.String, com.atlassian.jira.rpc.soap.beans.RemoteIssue, java.lang.String)
      */
     public function createChildIssue(RemoteIssue $issue)
     {
-        // We cannot use \Jira\Request\IssueRequest::call() since the issue key
-        // is passed as the last argument of the RPC call.
+        // We cannot use IssueRequest::call() since the issue key is passed as
+        // the last argument of the RPC call.
         $method = 'createChildIssue';
         if ($this->_uniqueKey) {
             return $this->_jiraClient->call($method, $issue, $this->_uniqueKey);
@@ -151,7 +132,7 @@ class IssueRequest extends JiraRequest
      * Creates an issue based on the passed details and security level and makes
      * it a child (e.g. subtask) of this issue.
      *
-     * @param \Jira\Remote\RemoteIssue $issue
+     * @param RemoteIssue $issue
      *   The new issue to create.
      * @param int $security_level
      *   The id of the required security level.
@@ -160,8 +141,8 @@ class IssueRequest extends JiraRequest
      */
     public function createChildIssueWithSecurityLevel(RemoteIssue $issue, $security_level)
     {
-        // We cannot use \Jira\Request\IssueRequest::call() since the issue key
-        // is passed as the third argument of the RPC call.
+        // We cannot use IssueRequest::call() since the issue key is passed as
+        // the third argument of the RPC call.
         $method = 'createChildIssueWithSecurityLevel';
         if ($this->_uniqueKey) {
             return $this->_jiraClient->call($method, $issue, $this->_uniqueKey, $security_level);
@@ -183,7 +164,7 @@ class IssueRequest extends JiraRequest
     /**
      * Returns information about the issue.
      *
-     * @return \Jira\Remote\RemoteIssue
+     * @return RemoteIssue
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#getIssue(java.lang.String, java.lang.String)
      */
@@ -295,8 +276,7 @@ class IssueRequest extends JiraRequest
      * @param string $action_id
      *   The id of the workflow action to progress to.
      * @param array $fields
-     *   An array of \Jira\Remote\RemoteField objects that are changed in the workflow
-     *   step.
+     *   An array of RemoteField objects that are changed in the workflow step.
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#progressWorkflowAction(java.lang.String, java.lang.String, java.lang.String, com.atlassian.jira.rpc.soap.beans.RemoteFieldValue[])
      */
@@ -309,7 +289,7 @@ class IssueRequest extends JiraRequest
      * Updates the issue with new values.
      *
      * @param array $field_values
-     *   An array of \Jira\Remote\RemoteFieldValue objects.
+     *   An array of RemoteFieldValue objects.
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#updateIssue(java.lang.String, java.lang.String, com.atlassian.jira.rpc.soap.beans.RemoteFieldValue[])
      */

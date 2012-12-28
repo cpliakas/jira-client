@@ -12,10 +12,10 @@ use Jira\JiraClient;
  *
  * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemoteIssue.html
  */
-class RemoteIssue extends RemoteEntity
+class RemoteIssue extends RemoteEntity implements CreatableInterface
 {
     /**
-     * An array of \Jira\Remote\RemoteVersion objects.
+     * An array of RemoteVersion objects.
      *
      * @var array
      */
@@ -36,21 +36,21 @@ class RemoteIssue extends RemoteEntity
     public $attachmentNames = array();
 
     /**
-     * An array of \Jira\Remote\RemoteComponent objects.
+     * An array of RemoteComponent objects.
      *
      * @var array
      */
     public $components = array();
 
     /**
-     * The date the issue was created in "" format.
+     * The date the issue was created in "1982-03-19T00:00:00.000Z" format.
      *
      * @var string
      */
     public $created;
 
     /**
-     * An array of \Jira\Remote\RemoteCustomFieldValue objects.
+     * An array of RemoteCustomFieldValue objects.
      *
      * @var array
      */
@@ -75,7 +75,7 @@ class RemoteIssue extends RemoteEntity
     public $environment;
 
     /**
-     * An array of \Jira\Remote\RemoteVersion objects.
+     * An array of RemoteVersion objects.
      *
      * @var array
      */
@@ -143,7 +143,7 @@ class RemoteIssue extends RemoteEntity
     public $votes;
 
     /**
-     * Overrides \Jira\Remote\RemoteObject::objectMappings().
+     * Overrides RemoteObject::objectMappings().
      */
     public function objectMappings()
     {
@@ -168,20 +168,14 @@ class RemoteIssue extends RemoteEntity
     }
 
     /**
-     * Creates an issue using this remote object.
+     * Implements CreatableInterface::create().
      *
-     * @param \Jira\JiraClient $jira_client
-     *   The JIRA client object.
-     *
-     * @return \Jira\Remote\RemoteIssue
+     * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#createIssue(java.lang.String, com.atlassian.jira.rpc.soap.beans.RemoteIssue)
      */
     public function create(JiraClient $jira_client)
     {
-        if (!isset($this->key)) {
-            return $jira_client->issue()->create($this);
-        } else {
-            throw new Exception('Issue cannot be created: Issue key is already set.');
-        }
+        $data = $jira_client->call('createIssue', $this);
+        return new RemoteIssue($data);
     }
 
     /**
@@ -213,7 +207,7 @@ class RemoteIssue extends RemoteEntity
     /**
      *
      * @return array
-     *   An array of \Jira\Remote\RemoteComponent objects.
+     *   An array of RemoteComponent objects.
      */
     public function getComponents()
     {
@@ -232,7 +226,7 @@ class RemoteIssue extends RemoteEntity
     /**
      *
      * @return array
-     *   An array of \Jira\Remote\RemoteCustomFieldValue objects.
+     *   An array of RemoteCustomFieldValue objects.
      */
     public function getCustomFieldValues()
     {
@@ -269,7 +263,7 @@ class RemoteIssue extends RemoteEntity
     /**
      *
      * @return array
-     *   An array of \Jira\Remote\RemoteVersion objects.
+     *   An array of RemoteVersion objects.
      */
     public function getFixVersions()
     {
@@ -370,9 +364,9 @@ class RemoteIssue extends RemoteEntity
     /**
      *
      * @param array $versions
-     *   An array of \Jira\Remote\RemoteVersion objects.
+     *   An array of RemoteVersion objects.
      *
-     * @return \Jira\Remote\RemoteIssue
+     * @return RemoteIssue
      */
     public function setAffectsVersions(array $versions)
     {
@@ -384,7 +378,7 @@ class RemoteIssue extends RemoteEntity
      *
      * @param string $assignee
      *
-     * @return \Jira\Remote\RemoteIssue
+     * @return RemoteIssue
      */
     public function setAssignee($assignee)
     {
@@ -397,7 +391,7 @@ class RemoteIssue extends RemoteEntity
      * @param array $names
      *   An array of strings containing the attachment names.
      *
-     * @return \Jira\Remote\RemoteIssue
+     * @return RemoteIssue
      */
     public function setAttachmentNames($names)
     {
@@ -408,9 +402,9 @@ class RemoteIssue extends RemoteEntity
     /**
      *
      * @param array $components
-     *   An array of \Jira\Remote\RemoteComponent objects.
+     *   An array of RemoteComponent objects.
      *
-     * @return \Jira\Remote\RemoteIssue
+     * @return RemoteIssue
      */
     public function setComponents(array $components)
     {
@@ -421,9 +415,9 @@ class RemoteIssue extends RemoteEntity
     /**
      *
      * @param array $values
-     *   An array of \Jira\Remote\RemoteCustomFieldValue objects.
+     *   An array of RemoteCustomFieldValue objects.
      *
-     * @return \Jira\Remote\RemoteIssue
+     * @return RemoteIssue
      */
     public function setCustomFieldValues(array $values)
     {
@@ -434,7 +428,7 @@ class RemoteIssue extends RemoteEntity
      *
      * @param string $description
      *
-     * @return \Jira\Remote\RemoteIssue
+     * @return RemoteIssue
      */
     public function setDescription($description)
     {
@@ -446,7 +440,7 @@ class RemoteIssue extends RemoteEntity
      *
      * @param string $date
      *
-     * @return \Jira\Remote\RemoteIssue
+     * @return RemoteIssue
      */
     public function setDuedate($date)
     {
@@ -458,7 +452,7 @@ class RemoteIssue extends RemoteEntity
      *
      * @param string $environment
      *
-     * @return \Jira\Remote\RemoteIssue
+     * @return RemoteIssue
      */
     public function setEnvironment($environment)
     {
@@ -469,9 +463,9 @@ class RemoteIssue extends RemoteEntity
     /**
      *
      * @param array $versions
-     *   An array of \Jira\Remote\RemoteVersion objects.
+     *   An array of RemoteVersion objects.
      *
-     * @return \Jira\Remote\RemoteIssue
+     * @return RemoteIssue
      */
     public function setFixVersions(array $versions)
     {
@@ -483,7 +477,7 @@ class RemoteIssue extends RemoteEntity
      *
      * @param string $priority
      *
-     * @return \Jira\Remote\RemoteIssue
+     * @return RemoteIssue
      */
     public function setPriority($priority)
     {
@@ -495,7 +489,7 @@ class RemoteIssue extends RemoteEntity
      *
      * @param string $project
      *
-     * @return \Jira\Remote\RemoteIssue
+     * @return RemoteIssue
      */
     public function setProject($project)
     {
@@ -507,7 +501,7 @@ class RemoteIssue extends RemoteEntity
      *
      * @param string $reporter
      *
-     * @return \Jira\Remote\RemoteIssue
+     * @return RemoteIssue
      */
     public function setReporter($reporter)
     {
@@ -519,7 +513,7 @@ class RemoteIssue extends RemoteEntity
      *
      * @param string $summary
      *
-     * @return \Jira\Remote\RemoteIssue
+     * @return RemoteIssue
      */
     public function setSummary($summary)
     {
@@ -532,7 +526,7 @@ class RemoteIssue extends RemoteEntity
      * @param int $type
      *   The numeric ID of the issue type.
      *
-     * @return \Jira\Remote\RemoteIssue
+     * @return RemoteIssue
      *
      */
     public function setType($type)
@@ -545,7 +539,7 @@ class RemoteIssue extends RemoteEntity
      *
      * @param string $updated
      *
-     * @return \Jira\Remote\RemoteIssue
+     * @return RemoteIssue
      *
      */
     public function setUpdated($updated)
