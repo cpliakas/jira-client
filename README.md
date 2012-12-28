@@ -29,12 +29,8 @@ Authenticating against JIRA
     $username = 'my.username';
     $password = 'my.password';
 
-    try {
-        $jira = new JiraClient($host);
-        $jira->login($username, $password);
-    } catch (Exception $e) {
-        // Something went wrong.
-    }
+     $jira = new JiraClient($host);
+     $jira->login($username, $password);
 
     ?>
 
@@ -44,11 +40,7 @@ Fetching an issue
 
     <?php
 
-    try {
-        $issue = $jira->issue('AB-123')->get();
-    } catch (Exception $e) {
-        // Something went wrong.
-    }
+    $issue = $jira->issue('AB-123')->get();
 
     ?>
 
@@ -61,15 +53,11 @@ Creating an issue
 
     $issue = new RemoteIssue();
 
-    try {
-        $issue
-            ->setProject('AB')
-            ->setType(1) // ID can be found via $jira->issueTypes()->get().
-            ->setSummary('Issue created via the API')
-            ->setDescription('This is a test issue created throug the API')
-            ->create($jira);
-    } catch (Exception $e) {
-        // Something went wrong.
-    }
+    $issue
+        ->setProject('AB')
+        ->setType(1) // ID can be found via $jira->issueTypes()->get().
+        ->setSummary('Issue created via the API')
+        ->setDescription('This is a test issue created throug the API')
+        ->create($jira);
 
     ?>
