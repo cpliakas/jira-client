@@ -42,11 +42,14 @@ class Issue extends Request
     /**
      * Updates the issue with new values.
      *
+     * @param array $field_values
+     *   An array of \Jira\Remote\FieldValue objects.
+     *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#updateIssue(java.lang.String, java.lang.String, com.atlassian.jira.rpc.soap.beans.RemoteFieldValue[])
      */
-    public function update()
+    public function update(array $field_values)
     {
-        return $this->_jiraClient->call('deleteIssue');
+        return $this->call('updateIssue', $field_values);
     }
 
     /**
