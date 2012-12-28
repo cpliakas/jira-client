@@ -6,14 +6,16 @@
 
 namespace Jira\Remote;
 
+use Jira\JiraClient;
+
 /**
  *
  * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemoteIssue.html
  */
-class Issue extends Entity
+class RemoteIssue extends RemoteEntity
 {
     /**
-     * An array of \Jira\Remote\Version objects.
+     * An array of \Jira\Remote\RemoteVersion objects.
      *
      * @var array
      */
@@ -34,7 +36,7 @@ class Issue extends Entity
     public $attachmentNames = array();
 
     /**
-     * An array of \Jira\Remote\Component objects.
+     * An array of \Jira\Remote\RemoteComponent objects.
      *
      * @var array
      */
@@ -48,7 +50,7 @@ class Issue extends Entity
     public $created;
 
     /**
-     * An array of \Jira\Remote\CustomFieldValue objects.
+     * An array of \Jira\Remote\RemoteCustomFieldValue objects.
      *
      * @var array
      */
@@ -73,7 +75,7 @@ class Issue extends Entity
     public $environment;
 
     /**
-     * An array of \Jira\Remote\Version objects.
+     * An array of \Jira\Remote\RemoteVersion objects.
      *
      * @var array
      */
@@ -141,25 +143,25 @@ class Issue extends Entity
     public $votes;
 
     /**
-     * Overrides \Jira\Remote\Object::objectMappings().
+     * Overrides \Jira\Remote\RemoteObject::objectMappings().
      */
     public function objectMappings()
     {
         return array(
             'affectsVersions' => array(
-                'classname' => '\Jira\Remote\Version',
+                'classname' => '\Jira\Remote\RemoteVersion',
                 'array' => true,
             ),
             'components' => array(
-                'classname' => '\Jira\Remote\Component',
+                'classname' => '\Jira\Remote\RemoteComponent',
                 'array' => true,
             ),
             'customFieldValues' => array(
-                'classname' => '\Jira\Remote\CustomFieldValue',
+                'classname' => '\Jira\Remote\RemoteCustomFieldValue',
                 'array' => true,
             ),
             'fixVersions' => array(
-                'classname' => '\Jira\Remote\Version',
+                'classname' => '\Jira\Remote\RemoteVersion',
                 'array' => true,
             ),
         );
@@ -168,12 +170,12 @@ class Issue extends Entity
     /**
      * Creates an issue using this remote object.
      *
-     * @param \Jira\Client $jira_client
+     * @param \Jira\JiraClient $jira_client
      *   The JIRA client object.
      *
-     * @return \Jira\Remote\Issue
+     * @return \Jira\Remote\RemoteIssue
      */
-    public function create(\Jira\Client $jira_client)
+    public function create(JiraClient $jira_client)
     {
         if (!isset($this->key)) {
             return $jira_client->issue()->create($this);
@@ -211,7 +213,7 @@ class Issue extends Entity
     /**
      *
      * @return array
-     *   An array of \Jira\Remote\Component objects.
+     *   An array of \Jira\Remote\RemoteComponent objects.
      */
     public function getComponents()
     {
@@ -230,7 +232,7 @@ class Issue extends Entity
     /**
      *
      * @return array
-     *   An array of \Jira\Remote\CustomFieldValue objects.
+     *   An array of \Jira\Remote\RemoteCustomFieldValue objects.
      */
     public function getCustomFieldValues()
     {
@@ -267,7 +269,7 @@ class Issue extends Entity
     /**
      *
      * @return array
-     *   An array of \Jira\Remote\Version objects.
+     *   An array of \Jira\Remote\RemoteVersion objects.
      */
     public function getFixVersions()
     {
@@ -368,9 +370,9 @@ class Issue extends Entity
     /**
      *
      * @param array $versions
-     *   An array of \Jira\Remote\Version objects.
+     *   An array of \Jira\Remote\RemoteVersion objects.
      *
-     * @return \Jira\Remote\Issue
+     * @return \Jira\Remote\RemoteIssue
      */
     public function setAffectsVersions(array $versions)
     {
@@ -382,7 +384,7 @@ class Issue extends Entity
      *
      * @param string $assignee
      *
-     * @return \Jira\Remote\Issue
+     * @return \Jira\Remote\RemoteIssue
      */
     public function setAssignee($assignee)
     {
@@ -395,7 +397,7 @@ class Issue extends Entity
      * @param array $names
      *   An array of strings containing the attachment names.
      *
-     * @return \Jira\Remote\Issue
+     * @return \Jira\Remote\RemoteIssue
      */
     public function setAttachmentNames($names)
     {
@@ -406,9 +408,9 @@ class Issue extends Entity
     /**
      *
      * @param array $components
-     *   An array of \Jira\Remote\Component objects.
+     *   An array of \Jira\Remote\RemoteComponent objects.
      *
-     * @return \Jira\Remote\Issue
+     * @return \Jira\Remote\RemoteIssue
      */
     public function setComponents(array $components)
     {
@@ -419,9 +421,9 @@ class Issue extends Entity
     /**
      *
      * @param array $values
-     *   An array of \Jira\Remote\CustomFieldValue objects.
+     *   An array of \Jira\Remote\RemoteCustomFieldValue objects.
      *
-     * @return \Jira\Remote\Issue
+     * @return \Jira\Remote\RemoteIssue
      */
     public function setCustomFieldValues(array $values)
     {
@@ -432,7 +434,7 @@ class Issue extends Entity
      *
      * @param string $description
      *
-     * @return \Jira\Remote\Issue
+     * @return \Jira\Remote\RemoteIssue
      */
     public function setDescription($description)
     {
@@ -444,7 +446,7 @@ class Issue extends Entity
      *
      * @param string $date
      *
-     * @return \Jira\Remote\Issue
+     * @return \Jira\Remote\RemoteIssue
      */
     public function setDuedate($date)
     {
@@ -456,7 +458,7 @@ class Issue extends Entity
      *
      * @param string $environment
      *
-     * @return \Jira\Remote\Issue
+     * @return \Jira\Remote\RemoteIssue
      */
     public function setEnvironment($environment)
     {
@@ -467,9 +469,9 @@ class Issue extends Entity
     /**
      *
      * @param array $versions
-     *   An array of \Jira\Remote\Version objects.
+     *   An array of \Jira\Remote\RemoteVersion objects.
      *
-     * @return \Jira\Remote\Issue
+     * @return \Jira\Remote\RemoteIssue
      */
     public function setFixVersions(array $versions)
     {
@@ -481,7 +483,7 @@ class Issue extends Entity
      *
      * @param string $priority
      *
-     * @return \Jira\Remote\Issue
+     * @return \Jira\Remote\RemoteIssue
      */
     public function setPriority($priority)
     {
@@ -493,7 +495,7 @@ class Issue extends Entity
      *
      * @param string $project
      *
-     * @return \Jira\Remote\Issue
+     * @return \Jira\Remote\RemoteIssue
      */
     public function setProject($project)
     {
@@ -505,7 +507,7 @@ class Issue extends Entity
      *
      * @param string $reporter
      *
-     * @return \Jira\Remote\Issue
+     * @return \Jira\Remote\RemoteIssue
      */
     public function setReporter($reporter)
     {
@@ -517,7 +519,7 @@ class Issue extends Entity
      *
      * @param string $summary
      *
-     * @return \Jira\Remote\Issue
+     * @return \Jira\Remote\RemoteIssue
      */
     public function setSummary($summary)
     {
@@ -530,7 +532,7 @@ class Issue extends Entity
      * @param int $type
      *   The numeric ID of the issue type.
      *
-     * @return \Jira\Remote\Issue
+     * @return \Jira\Remote\RemoteIssue
      *
      */
     public function setType($type)
@@ -543,7 +545,7 @@ class Issue extends Entity
      *
      * @param string $updated
      *
-     * @return \Jira\Remote\Issue
+     * @return \Jira\Remote\RemoteIssue
      *
      */
     public function setUpdated($updated)

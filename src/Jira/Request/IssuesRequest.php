@@ -6,12 +6,10 @@
 
 namespace Jira\Request;
 
-use Jira\Request;
-
 /**
  *
  */
-class Issues extends Request
+class IssuesRequest extends JiraRequest
 {
     /**
      * Unique keys are not required.
@@ -19,15 +17,15 @@ class Issues extends Request
     protected $_uniqueKeyRequired = false;
 
     /**
-     * Overrides \Jira\Request:call().
+     * Overrides \Jira\Request\JiraRequest:call().
      *
-     * Returns all data as arrays of \Jira\Remote\Issue objects.
+     * Returns all data as arrays of \Jira\Remote\RemoteIssue objects.
      */
     public function call($method)
     {
         $args = func_get_args();
         $data = call_user_func_array(array($this->_jiraClient, 'call'), $args);
-        return $this->returnObjectArray($data, '\Jira\Remote\Issue', 'key');
+        return $this->returnObjectArray($data, '\Jira\Remote\RemoteIssue', 'key');
     }
 
     /**
@@ -41,7 +39,7 @@ class Issues extends Request
      *   The total number of issues to return.
      *
      * @return array
-     *   An array of \Jira\Remote\Issue objects.
+     *   An array of \Jira\Remote\RemoteIssue objects.
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#getIssuesFromFilterWithLimit(java.lang.String, java.lang.String, int, int)
      */
@@ -59,7 +57,7 @@ class Issues extends Request
      *   The total number of issues to return.
      *
      * @return array
-     *   An array of \Jira\Remote\Issue objects.
+     *   An array of \Jira\Remote\RemoteIssue objects.
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#getIssuesFromJqlSearch(java.lang.String, java.lang.String, int)
      */

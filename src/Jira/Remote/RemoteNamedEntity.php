@@ -6,7 +6,7 @@ namespace Jira\Remote;
  *
  * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemoteNamedEntity.html
  */
-class NamedEntity extends Entity
+class RemoteNamedEntity extends RemoteEntity
 {
     /**
      *
@@ -27,7 +27,7 @@ class NamedEntity extends Entity
      *
      * @param string $name
      *
-     * @return Jira\Remote\NamedEntity
+     * @return Jira\Remote\RemoteNamedEntity
      *
      */
     public function setName($name)

@@ -10,7 +10,7 @@ namespace Jira\Remote;
  *
  * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemoteUser.html
  */
-class User extends Object
+class RemoteUser extends RemoteObject
 {
     /**
      *
@@ -61,7 +61,7 @@ class User extends Object
      *
      * @param string $email
      *
-     * @return \Jira\Remote\User
+     * @return \Jira\Remote\RemoteUser
      */
     public function setEmail($email)
     {
@@ -73,7 +73,7 @@ class User extends Object
      *
      * @param string $fullname
      *
-     * @return \Jira\Remote\User
+     * @return \Jira\Remote\RemoteUser
      */
     public function setFullname($fullname)
     {
@@ -85,7 +85,7 @@ class User extends Object
      *
      * @param string $name
      *
-     * @return \Jira\Remote\User
+     * @return \Jira\Remote\RemoteUser
      */
     public function setName($name)
     {

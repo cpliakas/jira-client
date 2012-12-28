@@ -6,25 +6,24 @@
 
 namespace Jira\Request;
 
-use Jira\Request;
-use Jira\Remote\Avatar as RemoteAvatar;;
-use Jira\Remote\PermissionScheme as RemotePermissionScheme;
-use Jira\Remote\Project as RemoteProject;
-use Jira\Remote\Scheme as RemoteScheme;
-use Jira\Remote\Version as RemoteVersion;
+use Jira\Remote\RemoteAvatar;
+use Jira\Remote\RemotePermissionScheme;
+use Jira\Remote\RemoteProject;
+use Jira\Remote\RemoteScheme;
+use Jira\Remote\RemoteVersion;
 
 /**
  *
  */
-class Project extends Request
+class ProjectRequest extends JiraRequest
 {
     /**
      * Adds a new version to the specified project.
      *
-     * @param \Jira\Remote\Version $version
+     * @param \Jira\Remote\RemoteVersion $version
      *   The new version details.
      *
-     * @return \Jira\Remote\Version
+     * @return \Jira\Remote\RemoteVersion
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#addVersion(java.lang.String, java.lang.String, com.atlassian.jira.rpc.soap.beans.RemoteVersion)
      */
@@ -60,14 +59,14 @@ class Project extends Request
      *   The URL of the new project.
      * @param string $lead
      *   The username of the project lead.
-     * @param \Jira\Remote\PermissionScheme|null $permission_scheme
+     * @param \Jira\Remote\RemotePermissionScheme|null $permission_scheme
      *   The permission scheme to use for the new project.
-     * @param \Jira\Remote\Scheme|null $notification_scheme
+     * @param \Jira\Remote\RemoteScheme|null $notification_scheme
      *   The notification scheme to use on the new project.
-     * @param \Jira\Remote\Scheme|null $security_scheme
+     * @param \Jira\Remote\RemoteScheme|null $security_scheme
      *   The issue security scheme to use on the new project.
      *
-     * @return \Jira\Remote\Project
+     * @return \Jira\Remote\RemoteProject
      *
      * @see assian/jira/rpc/soap/JiraSoapService.html#createProject(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, com.atlassian.jira.rpc.soap.beans.RemotePermissionScheme, com.atlassian.jira.rpc.soap.beans.RemoteScheme, com.atlassian.jira.rpc.soap.beans.RemoteScheme)
      */
@@ -91,14 +90,14 @@ class Project extends Request
      * Returns an array of all the components for the project.
      *
      * @return array
-     *   An array of \Jira\Remote\Component objects.
+     *   An array of \Jira\Remote\RemoteComponent objects.
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#getComponents(java.lang.String, java.lang.String)
      */
     public function getComponents()
     {
         $data = $this->call('getComponents');
-        return $this->returnObjectArray($data, '\Jira\Remote\Component');
+        return $this->returnObjectArray($data, '\Jira\Remote\RemoteComponent');
     }
 
     /**
@@ -112,13 +111,13 @@ class Project extends Request
     public function getFieldsForCreate($type_id)
     {
         $data = $this->call('getFieldsForCreate', $type_id);
-        return $this->returnObjectArray($data, '\Jira\Remote\Field');
+        return $this->returnObjectArray($data, '\Jira\Remote\RemoteField');
     }
 
     /**
      * Retrieves the current avatar for the project.
      *
-     * @return \Jira\Remote\Avatar
+     * @return \Jira\Remote\RemoteAvatar
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#getProjectAvatar(java.lang.String, java.lang.String)
      */
@@ -136,20 +135,20 @@ class Project extends Request
      *   Defaults to TRUE.
      *
      * @return array
-     *   An array of \Jira\Remote\Avatar objects.
+     *   An array of \Jira\Remote\RemoteAvatar objects.
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#getProjectAvatars(java.lang.String, java.lang.String, boolean)
      */
     public function getAvatars($include_system_avatars = TRUE)
     {
         $data = $this->call('getProjectAvatars', $include_system_avatars);
-        return $this->returnObjectArray($data, '\Jira\Remote\Avatar');
+        return $this->returnObjectArray($data, '\Jira\Remote\RemoteAvatar');
     }
 
     /**
      * Returns the Project details.
      *
-     * @return \Jira\Remote\Project
+     * @return \Jira\Remote\RemoteProject
      *   The project details.
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#getProjectByKey(java.lang.String, java.lang.String)
@@ -164,20 +163,20 @@ class Project extends Request
      * Returns an array of all the versions for the specified project key.
      *
      * @return array
-     *   An array of \Jira\Remote\Version objects.
+     *   An array of \Jira\Remote\RemoteVersion objects.
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#getVersions(java.lang.String, java.lang.String)
      */
     public function getVersions()
     {
         $data = $this->call('getVersions');
-        return $this->returnObjectArray($data, '\Jira\Remote\Version');
+        return $this->returnObjectArray($data, '\Jira\Remote\RemoteVersion');
     }
 
     /**
      * ??
      *
-     * @param \Jira\Remote\Version $version
+     * @param \Jira\Remote\RemoteVersion $version
      *   The new version details.
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#releaseVersion(java.lang.String, java.lang.String, com.atlassian.jira.rpc.soap.beans.RemoteVersion)

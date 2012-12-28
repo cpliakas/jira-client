@@ -10,7 +10,7 @@ namespace Jira\Remote;
  *
  * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemoteIssueType.html
  */
-class IssueType extends Constant
+class RemoteIssueType extends RemoteConstant
 {
 
   /**
@@ -32,7 +32,7 @@ class IssueType extends Constant
    *
    * @param bool $sub_task
    *
-   * @return \Jira\Remote\IssueType
+   * @return \Jira\Remote\RemoteIssueType
    */
   public function setSubTask($sub_task)
   {

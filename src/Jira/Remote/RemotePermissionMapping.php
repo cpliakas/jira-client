@@ -10,34 +10,34 @@ namespace Jira\Remote;
  *
  * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemotePermissionMapping.html
  */
-class PermissionMapping extends Object
+class RemotePermissionMapping extends RemoteObject
 {
     /**
      *
-     * @var \Jira\Remote\Permission
+     * @var \Jira\Remote\RemotePermission
      *
      */
     public $permission;
 
     /**
-     * An array of \Jira\Remote\Entity objects.
+     * An array of \Jira\Remote\RemoteEntity objects.
      *
      * @var array
      */
     public $entities = array();
 
     /**
-     * Overrides \Jira\Remote\Object::objectMappings().
+     * Overrides \Jira\Remote\RemoteObject::objectMappings().
      */
     public function objectMappings()
     {
         return array(
             'permission' => array(
-                'classname' => '\Jira\Remote\Permission',
+                'classname' => '\Jira\Remote\RemotePermission',
                 'array' => false,
             ),
             'entities' => array(
-                'classname' => '\Jira\Remote\Entity',
+                'classname' => '\Jira\Remote\RemoteEntity',
                 'array' => true,
             ),
         );
@@ -45,7 +45,7 @@ class PermissionMapping extends Object
 
     /**
      *
-     * @return \Jira\Remote\Permission
+     * @return \Jira\Remote\RemotePermission
      */
     public function getPermission()
     {
@@ -55,7 +55,7 @@ class PermissionMapping extends Object
     /**
      *
      * @return array
-     *   An array of \Jira\Remote\Entity objects.
+     *   An array of \Jira\Remote\RemoteEntity objects.
      */
     public function getRemoteEntities()
     {
@@ -65,12 +65,12 @@ class PermissionMapping extends Object
 
     /**
      *
-     * @param \Jira\Remote\Permission $permission
+     * @param \Jira\Remote\RemotePermission $permission
      *
-     * @return \Jira\Remote\PermissionMapping
+     * @return \Jira\Remote\RemotePermissionMapping
      *
      */
-    public function setPermission(Permission $permission)
+    public function setPermission(RemotePermission $permission)
     {
         $this->permission = $permission;
         return $this;
@@ -79,9 +79,9 @@ class PermissionMapping extends Object
     /**
      *
      * @param array $entities
-     *   An array of \Jira\Remote\Entity objects.
+     *   An array of \Jira\Remote\RemoteEntity objects.
      *
-     * @return \Jira\Remote\PermissionMapping
+     * @return \Jira\Remote\RemotePermissionMapping
      *
      */
     public function setRemoteEntities(array $entities)

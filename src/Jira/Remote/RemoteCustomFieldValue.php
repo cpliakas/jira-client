@@ -10,7 +10,7 @@ namespace Jira\Remote;
  *
  * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemoteCustomFieldValue.html
  */
-class CustomFieldValue extends Object
+class RemoteCustomFieldValue extends RemoteObject
 {
     /**
      *
@@ -61,7 +61,7 @@ class CustomFieldValue extends Object
      *
      * @param string $id
      *
-     * @return \Jira\Remote\CustomFieldValue
+     * @return \Jira\Remote\RemoteCustomFieldValue
      */
     public function setCustomfieldId($id)
     {
@@ -73,7 +73,7 @@ class CustomFieldValue extends Object
      *
      * @param string $key
      *
-     * @return \Jira\Remote\CustomFieldValue
+     * @return \Jira\Remote\RemoteCustomFieldValue
      */
     public function setKey($key)
     {
@@ -85,7 +85,7 @@ class CustomFieldValue extends Object
      *
      * @param array $values
      *
-     * @return \Jira\Remote\CustomFieldValue
+     * @return \Jira\Remote\RemoteCustomFieldValue
      */
     public function setValues($values)
     {

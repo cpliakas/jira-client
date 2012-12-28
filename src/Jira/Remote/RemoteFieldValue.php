@@ -10,7 +10,7 @@ namespace Jira\Remote;
  *
  * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemoteFieldValue.html
  */
-class FieldValue extends Object
+class RemoteFieldValue extends RemoteObject
 {
     /**
      *
@@ -46,7 +46,7 @@ class FieldValue extends Object
      *
      * @param string $id
      *
-     * @return \Jira\Remote\FieldValue
+     * @return \Jira\Remote\RemoteFieldValue
      */
     public function setId($id)
     {
@@ -58,7 +58,7 @@ class FieldValue extends Object
      *
      * @param array $values
      *
-     * @return \Jira\Remote\FieldValue
+     * @return \Jira\Remote\RemoteFieldValue
      */
     public function setValues(array $values)
     {

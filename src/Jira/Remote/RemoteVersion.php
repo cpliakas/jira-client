@@ -10,7 +10,7 @@ namespace Jira\Remote;
  *
  * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemoteVersion.html
  */
-class Version extends NamedEntity
+class RemoteVersion extends RemoteNamedEntity
 {
     /**
      *
@@ -77,7 +77,7 @@ class Version extends NamedEntity
      *
      * @param bool $archived
      *
-     * @return \Jira\Remote\Version
+     * @return \Jira\Remote\RemoteVersion
      */
     public function setArchived($archived)
     {
@@ -89,7 +89,7 @@ class Version extends NamedEntity
      *
      * @param bool $released
      *
-     * @return \Jira\Remote\Version
+     * @return \Jira\Remote\RemoteVersion
      */
     public function setReleased($released)
     {
@@ -102,7 +102,7 @@ class Version extends NamedEntity
      * @param string $release_date
      *   The release date e.g. "1982-03-19T00:00:00.000Z".
      *
-     * @return \Jira\Remote\Version
+     * @return \Jira\Remote\RemoteVersion
      */
     public function setReleaseDate($release_date)
     {
@@ -114,7 +114,7 @@ class Version extends NamedEntity
      *
      * @param int $sequence
      *
-     * @return \Jira\Remote\Version
+     * @return \Jira\Remote\RemoteVersion
      */
     public function setSequence($sequence)
     {

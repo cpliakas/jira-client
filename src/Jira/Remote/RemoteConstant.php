@@ -10,7 +10,7 @@ namespace Jira\Remote;
  *
  * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemoteConstant.html
  */
-class Constant extends NamedEntity
+class RemoteConstant extends RemoteNamedEntity
 {
     /**
      *
@@ -46,7 +46,7 @@ class Constant extends NamedEntity
      *
      * @param string $description
      *
-     * @return \Jira\Remote\Constant
+     * @return \Jira\Remote\RemoteConstant
      */
     public function setDescription($description)
     {
@@ -58,7 +58,7 @@ class Constant extends NamedEntity
      *
      * @param string $icon
      *
-     * @return \Jira\Remote\Constant
+     * @return \Jira\Remote\RemoteConstant
      */
     public function setIcon($icon)
     {

@@ -10,7 +10,7 @@ namespace Jira\Remote;
  *
  * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemoteScheme.html
  */
-class Scheme extends Object
+class RemoteScheme extends RemoteObject
 {
     /**
      *
@@ -32,6 +32,7 @@ class Scheme extends Object
 
     /**
      *
+     * @var string
      */
     public $type;
 
@@ -75,7 +76,7 @@ class Scheme extends Object
      *
      * @param int $id
      *
-     * @return \Jira\Remote\Scheme
+     * @return \Jira\Remote\RemoteScheme
      */
     public function setId($id)
     {
@@ -87,7 +88,7 @@ class Scheme extends Object
      *
      * @param string $name
      *
-     * @return \Jira\Remote\Scheme
+     * @return \Jira\Remote\RemoteScheme
      *
      */
     public function setName($name) {
@@ -99,7 +100,7 @@ class Scheme extends Object
      *
      * @param string $description
      *
-     * @return \Jira\Remote\Scheme
+     * @return \Jira\Remote\RemoteScheme
      *
      */
     public function setDescription($description)
@@ -112,7 +113,7 @@ class Scheme extends Object
      *
      * @param string $type
      *
-     * @return \Jira\Remote\Scheme
+     * @return \Jira\Remote\RemoteScheme
      *
      */
     public function setType($type) {

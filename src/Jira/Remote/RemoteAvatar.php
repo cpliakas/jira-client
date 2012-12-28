@@ -11,7 +11,7 @@ namespace Jira\Remote;
  *
  * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemoteAvatar.html
  */
-class Avatar extends Object
+class RemoteAvatar extends RemoteObject
 {
     /**
      *

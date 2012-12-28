@@ -11,10 +11,10 @@ use InvalidArgumentException;
 /**
  * Base class for all remote JIRA objects.
  */
-class Object
+class RemoteObject
 {
     /**
-     * Constructs a \Jira\Remote\Object object.
+     * Constructs a \Jira\Remote\RemoteObject object.
      *
      * @param stdClass|array
      *   The data returned by the RPC call.
@@ -27,7 +27,8 @@ class Object
                 $data = (array) $data;
             }
         } elseif (!is_array($data)) {
-            throw new InvalidArgumentException('First parameter passed to \Jira\Remote\Object must be an object or array.');
+            $class = get_called_class();
+            throw new InvalidArgumentException('First parameter passed to ' . $class . ' must be an object or array.');
         }
 
         // Store data as public properties, map to objects if applicable.
@@ -73,7 +74,8 @@ class Object
      * Returns an array of object mappings.
      *
      * Data is returned in primitive structures from the SOAP client. This maps
-     * the keys and properties to the corresponding \Jira\Remote\Object objects.
+     * the keys and properties to the corresponding \Jira\Remote\RemoteObject
+     * objects.
      *
      * @return array
      *   An associative array keyed by property name to an associative array

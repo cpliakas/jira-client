@@ -10,7 +10,7 @@ namespace Jira\Remote;
  *
  * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemotePermission.html
  */
-class Permission extends Object
+class RemotePermission extends RemoteObject
 {
     /**
      *
@@ -46,7 +46,7 @@ class Permission extends Object
      *
      * @param string $name
      *
-     * @return \Jira\Remote\Permission
+     * @return \Jira\Remote\RemotePermission
      *
      */
     public function setName($name)
@@ -59,7 +59,7 @@ class Permission extends Object
      *
      * @param string $permission
      *
-     * @return \Jira\Remote\Permission
+     * @return \Jira\Remote\RemotePermission
      *
      */
     public function setPermission($permission)

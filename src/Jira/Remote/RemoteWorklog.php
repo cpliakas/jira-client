@@ -10,7 +10,7 @@ namespace Jira\Remote;
  *
  * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemoteWorklog.html
  */
-class Worklog extends Object
+class RemoteWorklog extends RemoteObject
 {
 
     /**
@@ -187,7 +187,7 @@ class Worklog extends Object
      *
      * @param string $comment
      *
-     * @return \Jira\Remote\Worklog
+     * @return \Jira\Remote\RemoteWorklog
      */
     public function setComment($comment)
     {
@@ -199,7 +199,7 @@ class Worklog extends Object
      *
      * @param string $group_level
      *
-     * @return \Jira\Remote\Worklog
+     * @return \Jira\Remote\RemoteWorklog
      */
     public function setGroupLevel($group_level)
     {
@@ -211,7 +211,7 @@ class Worklog extends Object
      *
      * @param string $id
      *
-     * @return \Jira\Remote\Worklog
+     * @return \Jira\Remote\RemoteWorklog
      */
     public function setId($id)
     {
@@ -223,7 +223,7 @@ class Worklog extends Object
      *
      * @param string $id
      *
-     * @return \Jira\Remote\Worklog
+     * @return \Jira\Remote\RemoteWorklog
      */
     public function setRoleLevelId($id)
     {
@@ -235,7 +235,7 @@ class Worklog extends Object
      *
      * @param string $date
      *
-     * @return \Jira\Remote\Worklog
+     * @return \Jira\Remote\RemoteWorklog
      */
     public function setStartDate($date)
     {
@@ -252,7 +252,7 @@ class Worklog extends Object
      *   - days: "3d", "10d", "120d"
      *   - weeks: "3w", "10w", "120w"
      *
-     * @return \Jira\Remote\Worklog
+     * @return \Jira\Remote\RemoteWorklog
      */
     public function setTimeSpent($time_spent)
     {

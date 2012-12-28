@@ -10,23 +10,23 @@ namespace Jira\Remote;
  *
  * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemotePermissionScheme.html
  */
-class PermissionScheme extends Scheme
+class RemotePermissionScheme extends RemoteScheme
 {
     /**
-     * An array of \Jira\Remote\PermissionMapping objects.
+     * An array of \Jira\Remote\RemotePermissionMapping objects.
      *
      * @var array
      */
      public $permissionMappings = array();
 
     /**
-     * Overrides \Jira\Remote\Object::objectMappings().
+     * Overrides \Jira\Remote\RemoteObject::objectMappings().
      */
     public function objectMappings()
     {
         return array(
             'permissionMappings' => array(
-                'classname' => '\Jira\Remote\PermissionMapping',
+                'classname' => '\Jira\Remote\RemotePermissionMapping',
                 'array' => true,
             ),
         );
@@ -34,16 +34,16 @@ class PermissionScheme extends Scheme
 
     /**
      *
-     * @param \Jira\Remote\Permission $permission
+     * @param \Jira\Remote\RemotePermission $permission
      *
      * @param array $entities
-     *   An array of \Jira\Remote\Entity objects.
+     *   An array of \Jira\Remote\RemoteEntity objects.
      *
-     * @return Jira\Remote\PermissionScheme
+     * @return Jira\Remote\RemotePermissionScheme
      */
-    public function addPermissionMapping(Permission $permission, array $entities)
+    public function addPermissionMapping(RemotePermission $permission, array $entities)
     {
-        $mapping = new PermissionMapping();
+        $mapping = new RemotePermissionMapping();
         $mapping->setPermission($permission);
         $mapping->setRemoteEntities($entities);
 
@@ -56,7 +56,7 @@ class PermissionScheme extends Scheme
     /**
      *
      * @return array
-     *   An array of \Jira\Remote\PermissionMapping objects.
+     *   An array of \Jira\Remote\RemotePermissionMapping objects.
      */
     public function getPermissionMappings()
     {
@@ -65,11 +65,11 @@ class PermissionScheme extends Scheme
 
     /**
      *
-     * @param PermissionMapping $mapping
+     * @param RemotePermissionMapping $mapping
      *
      * @return Jira\Remote\PermissionScheme
      */
-    public function removePermissionMapping(PermissionMapping $mapping)
+    public function removePermissionMapping(RemotePermissionMapping $mapping)
     {
         $name = $mapping->getPermission()->getName();
         unset($this->permissionMappings[$name]);
@@ -79,9 +79,9 @@ class PermissionScheme extends Scheme
     /**
      *
      * @param array $mappings
-     *   An array of \Jira\Remote\PermissionMapping objects.
+     *   An array of \Jira\Remote\RemotePermissionMapping objects.
      *
-     * @return Jira\Remote\PermissionScheme
+     * @return Jira\Remote\RemotePermissionScheme
      */
     public function setPermissionMappings(array $mappings)
     {

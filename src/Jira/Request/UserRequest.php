@@ -6,13 +6,12 @@
 
 namespace Jira\Request;
 
-use Jira\Request;
-use Jira\Remote\User as RemoteUser;
+use Jira\Remote\RemoteUser;
 
 /**
  *
  */
-class User extends Request
+class UserRequest extends JiraRequest
 {
     /**
      * Creates a user.
@@ -24,7 +23,7 @@ class User extends Request
      * @param string $email
      *   The user's email address.
      *
-     * @return \Jira\Remote\User
+     * @return \Jira\Remote\RemoteUser
      *   The updated user object.
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#createUser(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)

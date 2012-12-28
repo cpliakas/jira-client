@@ -4,19 +4,20 @@
  *
  */
 
-namespace Jira;
+namespace Jira\Request;
 
 use Exception;
+use Jira\JiraClient;
 
 /**
  * Base class for all request objects.
  */
-class Request
+class JiraRequest
 {
     /**
      * The JIRA client object that instantiated this class.
      *
-     * @var \Jira\Client
+     * @var \Jira\JiraClient
      */
     protected $_jiraClient;
 
@@ -39,15 +40,15 @@ class Request
     protected $_uniqueKeyRequired = true;
 
     /**
-     * Constructs a \Jira\Request object.
+     * Constructs a \Jira\Request\JiraRequest object.
      *
-     * @param \Jira\Client $jira_client
+     * @param \Jira\JiraClient $jira_client
      *   The JIRA client object that instantiated this class.
      * @param string|null
      *   An optional unique key for this object e.g. the issue key, project key,
      *   etc. Defaults to null.
      */
-    public function __construct(Client $jira_client, $unique_key = null)
+    public function __construct(JiraClient $jira_client, $unique_key = null)
     {
         $this->_jiraClient = $jira_client;
         $this->_uniqueKey = $unique_key;
@@ -56,7 +57,7 @@ class Request
     /**
      * Returns the Jira Client object that instantiated this class.
      *
-     * @return \Jira\Client
+     * @return \Jira\JiraClient
      */
     public function getJiraClient()
     {
@@ -104,7 +105,7 @@ class Request
      * Helper function that returns an array of objects.
      *
      * @param array $data
-     *   The raw data returned by \Jira\Request::call().
+     *   The raw data returned by \Jira\Request\JiraRequest::call().
      * @param string $classname
      *   The name of the class used to create the objects.
      * @param string|null $key

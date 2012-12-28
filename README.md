@@ -21,7 +21,7 @@ Authenticating against JIRA
 
     <?php
 
-    use Jira\Client as JiraClient;
+    use Jira\JiraClient;
 
     // Modify accordingly, note that in some installations the JIRA instance is
     // in the document root and not in the "jira" subdirectory.
@@ -49,7 +49,7 @@ Creating an issue
 
     <?php
 
-    use Jira\Remote\Issue as RemoteIssue;
+    use Jira\Remote\RemoteIssue;
 
     $issue = new RemoteIssue();
 

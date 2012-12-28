@@ -7,21 +7,17 @@
 
 namespace Jira;
 
-use Jira\Remote\Issue as RemoteIssue;
-use Jira\Remote\PermissionScheme as RemotePermissionScheme;
-use Jira\Remote\Scheme as RemoteScheme;
-use Jira\Remote\User as RemoteUser;
-use Jira\Request\Issue;
-use Jira\Request\Issues;
-use Jira\Request\IssueTypes;
-use Jira\Request\Project;
-use Jira\Request\User;
+use Jira\Request\IssueRequest;
+use Jira\Request\IssuesRequest;
+use Jira\Request\IssueTypesRequest;
+use Jira\Request\ProjectRequest;
+use Jira\Request\UserRequest;
 use Zend\Soap\Client as SoapClient;
 
 /**
  * Wrapper around the Zend SOAP client connected to a JIRA instance.
  */
-class Client
+class JiraClient
 {
     /**
      * The WSDL endpoint.
@@ -125,34 +121,34 @@ class Client
      *   The key of the issue to return, e.g. "AB-123", "CD-456". Defaults to
      *   null, which is useful for creating a new issue.
      *
-     * @return \Jira\Request\Issue
+     * @return \Jira\Request\IssueRequest
      *   The request object for the issue.
      */
     public function issue($issue_key = null)
     {
-        return new Issue($this, $issue_key);
+        return new IssueRequest($this, $issue_key);
     }
 
     /**
      * Returns an issues request object.
      *
-     * @return \Jira\Request\Issues
+     * @return \Jira\Request\IssuesRequest
      *   The request object for the issues.
      */
     public function issues()
     {
-        return new Issues($this);
+        return new IssuesRequest($this);
     }
 
     /**
      * Returns an issue types request object.
      *
-     * @return \Jira\Request\IssueTypes
+     * @return \Jira\Request\IssueTypesRequest
      *   The request object for issue types.
      */
     public function issueTypes()
     {
-        return new IssueTypes($this);
+        return new IssueTypesRequest($this);
     }
 
     /**
@@ -161,12 +157,12 @@ class Client
      * @param string $project_key
      *   The unique key of the project, e.g "AB", "CD".
      *
-     * @return \Jira\Request\Project
+     * @return \Jira\Request\ProjectRequest
      *   The request object for the project.
      */
     public function project($project_key)
     {
-        return new Project($this, $project_key);
+        return new ProjectRequest($this, $project_key);
     }
 
     /**
@@ -175,12 +171,12 @@ class Client
      * @param string $username
      *   The unique machine name of the user.
      *
-     * @return \Jira\Request\User
+     * @return \Jira\Request\UserRequest
      *   The request object for the user.
      */
     public function user($username)
     {
-        return new User($this, $username);
+        return new UserRequest($this, $username);
     }
 
     /**

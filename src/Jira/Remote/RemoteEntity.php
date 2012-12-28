@@ -2,12 +2,11 @@
 
 namespace Jira\Remote;
 
-
 /**
  *
  * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/beans/RemoteEntity.html
  */
-class Entity extends Object
+class RemoteEntity extends RemoteObject
 {
     /**
      *
@@ -29,7 +28,7 @@ class Entity extends Object
      *
      * @param string $id
      *
-     * @return \Jira\Remote\Entity
+     * @return \Jira\Remote\RemoteEntity
      */
     public function setId($id)
     {
