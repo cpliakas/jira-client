@@ -23,7 +23,6 @@ class IssueTypesRequest extends JiraRequest
         return $this->returnObjectArray($data, '\Jira\Remote\RemoteIssueType', 'id');
     }
 
-
     /**
      * Returns an array of all the issue types for all projects in JIRA.
      *

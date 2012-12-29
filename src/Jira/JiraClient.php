@@ -13,10 +13,10 @@ use Jira\Request\IssuesRequest;
 use Jira\Request\IssueTypesRequest;
 use Jira\Request\ProjectRequest;
 use Jira\Request\UserRequest;
-use Zend\Soap\Client as ZendSoapClient;
+use Jira\Soap\JiraSoapInterface;
 
 /**
- * Wrapper around the Zend SOAP client connected to a JIRA instance.
+ * 
  */
 class JiraClient
 {
@@ -26,11 +26,25 @@ class JiraClient
     const WSDL = '/rpc/soap/jirasoapservice-v2?wsdl';
 
     /**
-     * The SOAP object.
+     * The classname of the SOAP adapter.
      *
-     * @var ZendSoapClient
+     * @var string
      */
-    protected $_soapClient;
+    static protected $_adapterClass = '\Jira\Soap\PhpSoapAdapter';
+
+    /**
+     * The options passed to the adapter.
+     *
+     * @var array
+     */
+    static protected $_adapterOptions = array();
+
+    /**
+     * The SOAP adapter.
+     *
+     * @var JiraSoapInterface
+     */
+    protected $_soapAdapter;
 
     /**
      * The JIRA authentication token for the user.
@@ -40,17 +54,31 @@ class JiraClient
     protected $_token = '';
 
     /**
+     * Sets the SOAP adapter class and options.
+     *
+     * @param string $classname
+     *   The adapter class.
+     * @param array $options
+     *   An array of options.
+     */
+    static public function setSoapAdapter($classname, array $options = array())
+    {
+        self::$_adapterClass = $classname;
+        self::$_adapterOptions = $options;
+    }
+
+    /**
      * Constructs a JiraClient object.
      *
      * @param string $host
      *   The URL to the JIRA server.
      * @param array $options
-     *   An array of options to pass to ZendSoapClient.
+     *   An array of options to pass to the adapter.
      */
     public function __construct($host, array $options = array())
     {
         $wsdl = rtrim($host, '/') . self::WSDL;
-        $this->_soapClient = new ZendSoapClient($wsdl, $options);
+        $this->_soapAdapter = new self::$_adapterClass($wsdl, self::$_adapterOptions);
     }
 
     /**
@@ -77,14 +105,14 @@ class JiraClient
     }
 
     /**
-     * Returns the SOAP client.
+     * Returns the SOAP adapter.
      *
-     * @return ZendSoapClient
-     *   The instantiated SOAP client.
+     * @return JiraSoapInterface
+     *   The SOAP adapter.
      */
-    function getSoapClient()
+    function getSoapAdapter()
     {
-        return $this->_soapClient;
+        return $this->_soapAdapter;
     }
 
     /**
@@ -100,7 +128,8 @@ class JiraClient
      */
     public function login($username, $password)
     {
-        $token = $this->_soapClient->login($username, $password);
+        $args = array($username, $password);
+        $token = $this->_soapAdapter->call('login', $args);
         $this->setToken($token);
         return $token;
     }
@@ -111,7 +140,7 @@ class JiraClient
     public function logout()
     {
         if ($this->_token) {
-            $this->_soapClient->logout($this->_token);
+            $this->_soapAdapter->call('logout', array($this->_token));
         }
     }
 
@@ -211,14 +240,6 @@ class JiraClient
     {
         $args = func_get_args();
         $args[0] = $this->_token;
-        return $this->__call($method, $args);
-    }
-
-    /**
-     * Pass all other method calls directly to the SOAP client.
-     */
-    public function __call($method, $args)
-    {
-        return call_user_func_array(array($this->_soapClient, $method), $args);
+        return $this->_soapAdapter->call($method, $args);
     }
 }
