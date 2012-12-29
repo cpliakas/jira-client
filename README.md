@@ -29,8 +29,8 @@ Authenticating against JIRA
     $username = 'my.username';
     $password = 'my.password';
 
-     $jira = new JiraClient($host);
-     $jira->login($username, $password);
+    $jira = new JiraClient($host);
+    $jira->login($username, $password);
 
     ?>
 
