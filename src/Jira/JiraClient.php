@@ -16,7 +16,7 @@ use Jira\Request\UserRequest;
 use Jira\Soap\JiraSoapInterface;
 
 /**
- * 
+ * Interacts with a JIRA instance.
  */
 class JiraClient
 {
@@ -105,7 +105,7 @@ class JiraClient
     }
 
     /**
-     * Returns the SOAP adapter.
+     * Returns the instantiated SOAP adapter.
      *
      * @return JiraSoapInterface
      *   The SOAP adapter.
@@ -113,6 +113,17 @@ class JiraClient
     function getSoapAdapter()
     {
         return $this->_soapAdapter;
+    }
+
+    /**
+     * Returns the SOAP client from the adapter.
+     *
+     * @return mixed
+     *   The SOAP client.
+     */
+    function getSoapClient()
+    {
+        return $this->_soapAdapter->getSoapClient();
     }
 
     /**
