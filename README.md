@@ -27,47 +27,47 @@ themselves. To create libraries/packages please read the [guidelines](https://pa
 Authenticating against JIRA
 ===========================
 
-    ``` php
+``` php
 
-    use Jira\JiraClient;
+use Jira\JiraClient;
     
-    require_once 'vendor/autoload.php';
+require_once 'vendor/autoload.php';
 
-    // Modify accordingly, note that in some installations the JIRA instance is
-    // in the document root and not in the "jira" subdirectory.
-    $host = 'http://localhost:8090/jira';
-    $username = 'my.username';
-    $password = 'my.password';
+// Modify accordingly, note that in some installations the JIRA instance is
+// in the document root and not in the "jira" subdirectory.
+$host = 'http://localhost:8090/jira';
+$username = 'my.username';
+$password = 'my.password';
 
-    $jira = new JiraClient($host);
-    $jira->login($username, $password);
+$jira = new JiraClient($host);
+$jira->login($username, $password);
 
-    ```
+```
 
 
 Fetching an issue
 =================
 
-    ``` php
+``` php
 
-    $issue = $jira->issue('AB-123')->get();
+$issue = $jira->issue('AB-123')->get();
 
-    ```
+```
 
 Creating an issue
 =================
 
-    ``` php
+``` php
 
-    use Jira\Remote\RemoteIssue;
+use Jira\Remote\RemoteIssue;
 
-    $issue = new RemoteIssue();
-    $issue
-        ->setProject('AB')
-        ->setType(1) // ID can be found via $jira->issueTypes()->get().
-        ->setSummary('Issue created via the API')
-        ->setDescription('This is a test issue created throug the API');
+$issue = new RemoteIssue();
+$issue
+    ->setProject('AB')
+    ->setType(1) // ID can be found via $jira->issueTypes()->get().
+    ->setSummary('Issue created via the API')
+    ->setDescription('This is a test issue created throug the API');
 
-    $jira->create($issue);
+$jira->create($issue);
 
-    ```
+```
