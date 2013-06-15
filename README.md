@@ -1,27 +1,37 @@
-Autoloading the JIRA library
-============================
+Installation
+--------------------
 
-    <?php
+1. Download the [`composer.phar`](https://getcomposer.org/composer.phar) executable or use the installer.
 
-    use Zend\Loader\StandardAutoloader;
+    ``` sh
+    $ curl -sS https://getcomposer.org/installer | php
+    ```
 
-    // Modify accordingly.
-    $path_to_lib = '/path/to/downloaded/library';
 
-    // Use any PSR-0 compliant autloader, such as Zend Framework's autoloader.
-    $loader = new StandardAutoloader();
-    $loader->registerNamespace('Jira', $path_to_lib . '/src/Jira');
-    $loader->register();
+2. Create a composer.json defining your dependencies. Note that this example is
+a short version for applications that are not meant to be published as packages
+themselves. To create libraries/packages please read the [guidelines](https://packagist.org/about).
 
-    ?>
+    ``` json
+    {
+        "require": {
+            "cpliakas/jira": "~1.0"
+        },
+        "minimum-stability": "beta"
+    }
+    ```
+
+3. Run Composer: `php composer.phar install`
 
 
 Authenticating against JIRA
 ===========================
 
-    <?php
+    ``` php
 
     use Jira\JiraClient;
+    
+    require_once 'vendor/autoload.php';
 
     // Modify accordingly, note that in some installations the JIRA instance is
     // in the document root and not in the "jira" subdirectory.
@@ -32,22 +42,22 @@ Authenticating against JIRA
     $jira = new JiraClient($host);
     $jira->login($username, $password);
 
-    ?>
+    ```
 
 
 Fetching an issue
 =================
 
-    <?php
+    ``` php
 
     $issue = $jira->issue('AB-123')->get();
 
-    ?>
+    ```
 
 Creating an issue
 =================
 
-    <?php
+    ``` php
 
     use Jira\Remote\RemoteIssue;
 
@@ -60,4 +70,4 @@ Creating an issue
 
     $jira->create($issue);
 
-    ?>
+    ```
