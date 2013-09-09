@@ -1,5 +1,4 @@
-Installation
---------------------
+## Installation
 
 1. Download the [`composer.phar`](https://getcomposer.org/composer.phar) executable or use the installer.
 
@@ -24,8 +23,7 @@ themselves. To create libraries/packages please read the [guidelines](https://pa
 3. Run Composer: `php composer.phar install`
 
 
-Authenticating against JIRA
-===========================
+## Authenticating against JIRA
 
 ``` php
 
@@ -45,8 +43,7 @@ $jira->login($username, $password);
 ```
 
 
-Fetching an issue
-=================
+## Fetching an issue
 
 ``` php
 
@@ -54,8 +51,7 @@ $issue = $jira->issue('AB-123')->get();
 
 ```
 
-Creating an issue
-=================
+## Creating an issue
 
 ``` php
 
