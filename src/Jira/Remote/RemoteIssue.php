@@ -422,6 +422,7 @@ class RemoteIssue extends RemoteEntity implements CreatableInterface
     public function setCustomFieldValues(array $values)
     {
         $this->customFieldValues = $values;
+        return $this;
     }
 
     /**
