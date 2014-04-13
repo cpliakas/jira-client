@@ -211,7 +211,7 @@ class RemoteIssue extends RemoteEntity implements CreatableInterface
      */
     public function getComponents()
     {
-        return $this->componetns;
+        return $this->components;
     }
 
     /**
