@@ -109,7 +109,7 @@ class ProjectRequest extends JiraRequest
      *
      * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#getProjectAvatars(java.lang.String, java.lang.String, boolean)
      */
-    public function getAvatars($include_system_avatars = TRUE)
+    public function getAvatars($include_system_avatars = true)
     {
         $data = $this->call('getProjectAvatars', $include_system_avatars);
         return $this->returnObjectArray($data, '\Jira\Remote\RemoteAvatar');

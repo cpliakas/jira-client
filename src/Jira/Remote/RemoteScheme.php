@@ -50,7 +50,8 @@ class RemoteScheme extends RemoteObject
      *
      * @return string
      */
-    public function getName($name) {
+    public function getName($name)
+    {
         return $this->name;
     }
 
@@ -91,7 +92,8 @@ class RemoteScheme extends RemoteObject
      * @return RemoteScheme
      *
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
         return $this;
     }
@@ -116,7 +118,8 @@ class RemoteScheme extends RemoteObject
      * @return RemoteScheme
      *
      */
-    public function setType($type) {
+    public function setType($type)
+    {
         $this->type = $type;
         return $this;
     }
