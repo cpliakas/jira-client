@@ -201,7 +201,8 @@ class IssueRequest extends JiraRequest
      */
     public function getComments()
     {
-        return $this->call('getComments');
+        $data =  $this->call('getComments');
+        return $this->returnObjectArray($data, '\Jira\Remote\RemoteComment');
     }
 
     /**
