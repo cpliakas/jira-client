@@ -12,6 +12,7 @@ use Jira\Request\IssueRequest;
 use Jira\Request\IssuesRequest;
 use Jira\Request\IssueTypesRequest;
 use Jira\Request\ProjectRequest;
+use Jira\Request\StatusRequest;
 use Jira\Request\UserRequest;
 use Jira\Soap\JiraSoapInterface;
 
@@ -229,6 +230,16 @@ class JiraClient
     public function user($username)
     {
         return new UserRequest($this, $username);
+    }
+
+    /**
+     * Returns an array of all the issue statuses in JIRA.
+     *
+     * @see https://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#getStatuses(java.lang.String)
+     */
+    public function statuses()
+    {
+      return new StatusRequest($this);
     }
 
     /**

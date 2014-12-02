@@ -117,4 +117,5 @@ class JiraRequest
         }
         return $objects;
     }
+
 }
