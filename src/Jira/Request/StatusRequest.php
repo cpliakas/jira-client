@@ -3,7 +3,6 @@
 /**
  *
  */
-
 namespace Jira\Request;
 
 /**
@@ -13,12 +12,12 @@ class StatusRequest extends JiraRequest
 {
 
     /**
-     * Returns an array of all the issue types for all projects in JIRA.
+     * Returns an array of all the issue statuses in JIRA.
      *
      * @return array
-     *   An array of RemoteIssueType objects.
+     *   An array of RemoteStatus objects.
      *
-     * @see http://docs.atlassian.com/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#getIssue(java.lang.String, java.lang.String)
+     * @see https://docs.atlassian.com/software/jira/docs/api/rpc-jira-plugin/latest/com/atlassian/jira/rpc/soap/JiraSoapService.html#getStatuses(java.lang.String)
      */
     public function getStatuses()
     {
