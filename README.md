@@ -15,8 +15,7 @@ themselves. To create libraries/packages please read the [guidelines](https://pa
     {
         "require": {
             "cpliakas/jira": "~1.0"
-        },
-        "minimum-stability": "beta"
+        }
     }
     ```
 

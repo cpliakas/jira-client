@@ -50,7 +50,7 @@ class RemoteVersion extends RemoteNamedEntity
      *
      * @return int
      */
-    public function	getSequence()
+    public function getSequence()
     {
         return $this->sequence;
     }

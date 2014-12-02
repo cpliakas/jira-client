@@ -82,7 +82,8 @@ class JiraRequest
      * @return mixed
      *   The data returned by the RPC call.
      */
-    public function call($method) {
+    public function call($method)
+    {
         $args = func_get_args();
         if (null !== $this->_uniqueKey) {
             $args[0] = $this->_uniqueKey;

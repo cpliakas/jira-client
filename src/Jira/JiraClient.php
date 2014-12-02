@@ -31,14 +31,14 @@ class JiraClient
      *
      * @var string
      */
-    static protected $_adapterClass = '\Jira\Soap\PhpSoapAdapter';
+    protected static $_adapterClass = '\Jira\Soap\PhpSoapAdapter';
 
     /**
      * The options passed to the adapter.
      *
      * @var array
      */
-    static protected $_adapterOptions = array();
+    protected static $_adapterOptions = array();
 
     /**
      * The SOAP adapter.
@@ -62,7 +62,7 @@ class JiraClient
      * @param array $options
      *   An array of options.
      */
-    static public function setSoapAdapter($classname, array $options = array())
+    public static function setSoapAdapter($classname, array $options = array())
     {
         self::$_adapterClass = $classname;
         self::$_adapterOptions = $options;
@@ -111,7 +111,7 @@ class JiraClient
      * @return JiraSoapInterface
      *   The SOAP adapter.
      */
-    function getSoapAdapter()
+    public function getSoapAdapter()
     {
         return $this->_soapAdapter;
     }
@@ -122,7 +122,7 @@ class JiraClient
      * @return mixed
      *   The SOAP client.
      */
-    function getSoapClient()
+    public function getSoapClient()
     {
         return $this->_soapAdapter->getSoapClient();
     }
