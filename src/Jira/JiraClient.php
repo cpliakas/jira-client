@@ -12,6 +12,7 @@ use Jira\Request\IssueRequest;
 use Jira\Request\IssuesRequest;
 use Jira\Request\IssueTypesRequest;
 use Jira\Request\ProjectRequest;
+use Jira\Request\StatusRequest;
 use Jira\Request\UserRequest;
 use Jira\Soap\JiraSoapInterface;
 
@@ -215,6 +216,17 @@ class JiraClient
     public function project($project_key)
     {
         return new ProjectRequest($this, $project_key);
+    }
+
+    /**
+     * Returns a status request object
+     *
+     * @return StatusRequest
+     *   The request object for statuses.
+     */
+    public function statuses()
+    {
+      return new StatusRequest($this);
     }
 
     /**
