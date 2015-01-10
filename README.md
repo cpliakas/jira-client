@@ -76,10 +76,10 @@ use Jira\Remote\RemoteFieldValue;
 $updates = [];
 
 $value = new RemoteFieldValue();
-$updates[] = $value->setId('assignee')->setValues('jon.doe');
+$updates[] = $value->setId('assignee')->setValues(['jon.doe']);
 
 $value = new RemoteFieldValue();
-$updates[] = $value->setId('due-date')->setValues('2015-12-31');
+$updates[] = $value->setId('due-date')->setValues(['2015-12-31']);
 
 $jira->issue('AB-1')->update($updates);
 
