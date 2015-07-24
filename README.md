@@ -85,3 +85,17 @@ $jira->issue('AB-1')->update($updates);
 
 ```
 
+
+## Add user to group
+
+``` php
+
+use Jira\Remote\RemoteUser;
+use Jira\Remote\RemoteGroup;
+
+$user = $jira->user("id")->get();
+$group = $jira->group("id")->get();
+
+$jira->call("addUserToGroup", $group, $user);
+
+```
