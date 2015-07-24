@@ -15,6 +15,7 @@ use Jira\Request\ProjectRequest;
 use Jira\Request\ProjectsRequest;
 use Jira\Request\StatusRequest;
 use Jira\Request\UserRequest;
+use Jira\Request\GroupRequest;
 use Jira\Soap\JiraSoapInterface;
 
 /**
@@ -253,6 +254,20 @@ class JiraClient
     public function user($username)
     {
         return new UserRequest($this, $username);
+    }
+
+    /**
+     * Returns a user request object.
+     *
+     * @param string $groupname
+     *   The unique name/id ofr the group
+     *
+     * @return GroupRequest
+     *   The request object for the group.
+     */
+    public function group($groupname)
+    {
+        return new GroupRequest($this, $groupname);
     }
 
     /**
