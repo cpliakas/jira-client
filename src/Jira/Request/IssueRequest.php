@@ -215,7 +215,7 @@ class IssueRequest extends JiraRequest
      */
     public function getFieldsForAction($action_id)
     {
-        return $this->call('getComments', $action_id);
+        return $this->call('getFieldsForAction', $action_id);
     }
 
     /**
