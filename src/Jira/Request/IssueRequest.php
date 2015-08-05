@@ -120,7 +120,7 @@ class IssueRequest extends JiraRequest
     {
         // We cannot use IssueRequest::call() since the issue key is passed as
         // the last argument of the RPC call.
-        $method = 'createChildIssue';
+        $method = 'createIssueWithParent';
         if ($this->_uniqueKey) {
             return $this->_jiraClient->call($method, $issue, $this->_uniqueKey);
         } else {
